@@ -26,29 +26,48 @@ app.getCityInfo = function (cityName) {
   });
 };
 
+app.chosenCity = [];
+
 app.findCityAPICall = async function (cityName) {
   // this will return an array of cities which matches the user input
   const cityInfo = await app.getCityInfo(cityName);
 
-  // renders all cities that matches user input to the DOM
-  cityInfo.Results.forEach((city) => {
-    const liHTML = `<li>${city.name}</li>`
+    //if user input returns multiple city options, the following function will render 
+    
+    if (cityInfo.Results.length > 1) {
+        // renders all cities that matches user input to the DOM
+        cityInfo.Results.forEach((city) => {
+            const liHTML = `<li>${city.name}</li>`
 
-    $('.cityOptions').append(liHTML);
-  })
+            $('.cityOptions').append(liHTML);
+        });
 
-  // listening for which matched city the user clicks on
-  $('.cityOptions').on('click', 'li', function () {
-    const chosenCity = cityInfo.Results.filter((city) => {
-      return city.name === $(this).text();
-    })
+        // listening for which matched city the user clicks on
+        $('.cityOptions').on('click', 'li', function () {
+            app.chosenCity = cityInfo.Results.filter((city) => {
+                return city.name === $(this).text();
+            })
+            
+            assignmentFunction(app.chosenCity);
+        })
+    } else {
+        app.chosenCity = cityInfo.Results
+        assignmentFunction(app.chosenCity);
+    }
 
-    const countryCode = chosenCity[0].c;
-    const latitude = chosenCity[0].lat;
-    const longitude = chosenCity[0].lon;
-    const placeName = chosenCity[0].name;
-  })
+    const assignmentFunction = (chosenCity) => {
+        app.countryCode = chosenCity[0].c;
+        app.latitude = chosenCity[0].lat;
+        app.longitude = chosenCity[0].lon;
+        app.placeName = chosenCity[0].name;
+    }
+
 };
+
+
+
+
+
 
 app.dashboardAPICalls = async function () {
 
@@ -59,7 +78,7 @@ app.init = function () {
 };
 
 $(function () {
-  app.init()
+    app.init()
 
 
 });
