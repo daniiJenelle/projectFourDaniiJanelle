@@ -19,7 +19,6 @@ const getCityInfo = (cityName) => {
 };
 
 
-
 //  API will return an array of results. If number of items in array is > 1, clear page and show a dropdown menu of possible cities. forEach function will be run on array to render each possible city reference that matches user's search query as items in a dropdown menu for user to select. 
 
 // Add event listener to listen to submit after user has chosen an item in dropbdown menu to store information from the selected city's object into the above 4 declared variables

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const getPokemon = (id) => {
+                return $.ajax({
+                    url: `https://pokeapi.co/api/v2/pokemon/${id}`,
+                    method: 'GET',
+                    dataType: 'json'
+                });
+            };
+
+            const getType = (name) => {
+                return $.ajax({
+                    url: `https://pokeapi.co/api/v2/type/${name}`,
+                    method: 'GET',
+                    dataType: 'json'
+                });
+            };
+
+            async function getData() {
+                const firstPokemon = await getPokemon(1);
+                const type = await getType(firstPokemon.types[0].type.name);
+
+                console.log(type);
+            };
+
+            
+
+            getData();    
+        
+        
+    </script>
+</body>
+</html>
