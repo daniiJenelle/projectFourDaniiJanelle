@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            
+            // var settings = {
+            //     "async": true,
+            //     "crossDomain": true,
+            //     "url": "https://wft-geo-db.p.rapidapi.com/v1/geo/cities/Q60",
+            //     "method": "GET",
+            //     "headers": {
+            //         "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
+            //         "x-rapidapi-key": "43527aa857msh0a328ee56d0c062p12b1c4jsnb310086469f1"
+            //     }
+            // }
+
+
+
+            // $.ajax(settings).then(function (response) {
+            //     console.log(response);
+            //     console.log(`did it work???`);
+            // });
+
+            weatherApp = function() {
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url: "https://wft-geo-db.p.rapidapi.com/v1/geo/cities",
+                    method: "GET",
+                    dataType: `json`,
+                    headers: {
+                        "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
+                        "x-rapidapi-key": "43527aa857msh0a328ee56d0c062p12b1c4jsnb310086469f1"
+                    }
+                }).then(function(result) {
+                    console.log(`did it work??`);
+                    console.log(result);
+                    
+                });
+            }
+
+            weatherApp();
+
+        });
+        
+
+    </script>
+    
+</body>
+</html>
