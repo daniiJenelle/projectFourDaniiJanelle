@@ -1,16 +1,14 @@
 const app = {};
-
 app.chosenCity = [];
 
 // function to render list of possible city name matches based on user input defined here
 app.formSubmit = function () {
   $(`form`).on(`submit`, function (e) {
     e.preventDefault();
-    let cityName = ($(`:text`).val());
-
     $('.cityOptions').empty();
     app.chosenCity = [];
 
+    let cityName = ($(`:text`).val());
     app.findCityAPICall(cityName);
 
   });
