@@ -1,16 +1,18 @@
 app = {}
 
 // function to render list of possible city name matches based on user input defined here
-app.cityMenu = function () {
+app.formSubmit = function () {
   $(`form`).on(`submit`, function (e) {
     e.preventDefault();
-    const cityName = ($(`:text`).val());
-
+    let cityName = ($(`:text`).val());
+    $('.cityOptions').empty();
+    app.chosenCity = [];
     app.findCityAPICall(cityName);
 
   });
 };
 
+// function for ajax call to get information about city based on city name
 app.getCityInfo = function (cityName) {
   return $.ajax({
     url: `https://devru-latitude-longitude-find-v1.p.rapidapi.com/latlon.php`,
@@ -26,18 +28,21 @@ app.getCityInfo = function (cityName) {
   });
 };
 
-app.getNews = function (countryCode) {
+// funtion for ajax call to get news based on country code
+
+app.getNews = function (cityName) {
   return $.ajax({
-    url: `https://newsapi.org/v2/top-headlines`,
+    url: `https://api.nytimes.com/svc/search/v2/articlesearch.json`,
     method: 'GET',
     dataType: 'json',
     data: {
-      apiKey: '5b261aba2f3f4717a9cae3d7c5dc07a8',
-      country: countryCode
+      'api-key': '25f7AaRW3nMz4B6VGWlyf69GrcGkw2Ee',
+      q: cityName
     }
   });
 };
 
+// function for ajax call to get timezone information based on latitude and longitutde
 app.getTimezone = function (latitude, longitude) {
   return $.ajax({
     url: `http://api.timezonedb.com/v2.1/get-time-zone`,
@@ -53,6 +58,7 @@ app.getTimezone = function (latitude, longitude) {
   });
 };
 
+// function for ajax call to get weather based on latitude and longitude
 app.getWeather = function (latitude, longitude) {
   return $.ajax({
     url: `http://api.openweathermap.org/data/2.5/weather`,
@@ -69,55 +75,74 @@ app.getWeather = function (latitude, longitude) {
 
 app.chosenCity = [];
 
+// function to determine the correct object that holds the city information which matches user search
 app.findCityAPICall = async function (cityName) {
-  // this will return an array of cities which matches the user input
-  const cityInfo = await app.getCityInfo(cityName);
+  // this will run ajax call and return an array of cities which matches the user input
+  let cityInfo = await app.getCityInfo(cityName);
+  app.handleCityInfo(cityInfo);
+};
 
-  const assignmentFunction = (chosenCity) => {
-    app.placeName = chosenCity[0].name;
-    app.countryCode = chosenCity[0].c;
-    app.latitude = chosenCity[0].lat;
-    app.longitude = chosenCity[0].lon;
-
-    app.dashboardAPICalls(app.countryCode, app.latitude, app.longitude);
-  }
-
-  //if user input returns multiple city options, the following function will render 
-
+app.handleCityInfo = function(cityInfo) {
+  cityInfo.Results.forEach((city) => {
+    if (city.name.includes(`null`)) {
+      city.name = city.name.replace(`(null)`, city.c)
+    }
+  });
   if (cityInfo.Results.length > 1) {
     // renders all cities that matches user input to the DOM
-    cityInfo.Results.forEach((city) => {
-      const liHTML = `<li>${city.name}</li>`
-
-      $('.cityOptions').append(liHTML);
-    });
-
-    // listening for which matched city the user clicks on
-    $('.cityOptions').on('click', 'li', function () {
-      app.chosenCity = cityInfo.Results.filter((city) => {
-        return city.name === $(this).text();
-      })
-
-      assignmentFunction(app.chosenCity);
-    })
+    app.renderCityList(cityInfo);
+    app.chooseCityFromList(cityInfo);
   } else {
     app.chosenCity = cityInfo.Results
     assignmentFunction(app.chosenCity);
   }
+}
 
-};
+// function to print list of cities on page that match user input
+app.renderCityList = function(cityInfo) {
+  cityInfo.Results.forEach((city) => {
+    const liHTML = `<li><a>${city.name}</a></li>`
+    // prints each city as a list item on page
+    $('.cityOptions').append(liHTML);
+  })
+}
 
-app.dashboardAPICalls = async function (countryCode, latitude, longitude) {
-  console.log(countryCode);
-  const news = await app.getNews(countryCode);
+// function to listen for which matched city the user clicks on
+app.chooseCityFromList = function (cityInfo) {
+  $('.cityOptions').on('click', 'li', function () {
+    app.chosenCity = cityInfo.Results.filter((city) => {
+      return city.name === $(this).text();
+    });
+    console.log(app.chosenCity);
+    assignmentFunction(app.chosenCity);
+  });
+}
+
+
+
+  
+
+
+// assignment function to grab the needed properties from our chosen city object
+const assignmentFunction = (chosenCity) => {
+  app.placeName = chosenCity[0].name;
+  app.countryCode = chosenCity[0].c;
+  app.latitude = chosenCity[0].lat;
+  app.longitude = chosenCity[0].lon;
+
+  // app.dashboardAPICalls(app.countryCode, app.latitude, app.longitude);
+}
+
+app.dashboardAPICalls = async function (cityName, latitude, longitude) {
+  const news = await app.getNews(cityName);
   const time = await app.getTimezone(latitude, longitude);
   const weather = await app.getWeather(latitude, longitude);
-  console.log(news, time, weather)
+  // console.log(news, time, weather)
 }
 
 
 app.init = function () {
-  app.cityMenu();
+  app.formSubmit();
 };
 
 $(function () {
