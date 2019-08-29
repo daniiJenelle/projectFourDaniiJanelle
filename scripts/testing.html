@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
+
 <body>
-    <script>
-        let a = 1;
-        let b = 4;
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script>
+    $.ajax({
+      url: `http://api.timezonedb.com/v2.1/get-time-zone`,
+      method: 'GET',
+      dataType: 'json',
+      data: {
+        key: '8EZVCD1H71OJ',
+        format: 'json',
+        by: 'position',
+        lat: 22,
+        lng: 114
+      }
+    }).then((res) => {
+      console.log(res)
+    })
 
-        const add = function () {
-            a = 6;
-            b = 11;
-        }
-        
-
-        add()
-
-        console.log(a, b);
-
-    </script>
+  </script>
 </body>
-</html>
 
+</html>
