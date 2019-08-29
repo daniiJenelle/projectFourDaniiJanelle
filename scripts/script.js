@@ -1,16 +1,82 @@
-app = {}
+const app = {};
+
+app.chosenCity = [];
 
 // function to render list of possible city name matches based on user input defined here
 app.formSubmit = function () {
   $(`form`).on(`submit`, function (e) {
     e.preventDefault();
     let cityName = ($(`:text`).val());
+
     $('.cityOptions').empty();
     app.chosenCity = [];
+
     app.findCityAPICall(cityName);
 
   });
 };
+
+// function to determine the correct object that holds the city information which matches user search
+app.findCityAPICall = async function (cityName) {
+  // this will run ajax call and return an array of cities which matches the user input
+  let cityInfo = await app.getCityInfo(cityName);
+  console.log(`Freshly retrieved data`, cityInfo);
+  app.handleCityInfo(cityInfo);
+};
+
+app.handleCityInfo = function (cityInfo) {
+  cityInfo.Results.forEach((city) => {
+    if (city.name.includes(`null`)) {
+      city.name = city.name.replace(`(null)`, city.c)
+    }
+  });
+  if (cityInfo.Results.length > 1) {
+    // renders all cities that matches user input to the DOM
+    app.renderCityList(cityInfo);
+    app.chooseCityFromList(cityInfo);
+  } else {
+    app.chosenCity = cityInfo.Results
+    assignmentFunction(app.chosenCity);
+  }
+}
+
+// function to print list of cities on page that match user input
+app.renderCityList = function (cityInfo) {
+  cityInfo.Results.forEach((city) => {
+    const liHTML = `<li><a>${city.name}</a></li>`
+    // prints each city as a list item on page
+    $('.cityOptions').append(liHTML);
+  })
+}
+
+// function to listen for which matched city the user clicks on
+app.chooseCityFromList = function (cityInfo) {
+  $('.cityOptions').on('click', 'li', function () {
+    app.chosenCity = cityInfo.Results.filter((city) => {
+      return city.name === $(this).text();
+    });
+    console.log(app.chosenCity);
+    assignmentFunction(app.chosenCity);
+    $('.cityOptions').off();
+  });
+}
+
+// assignment function to grab the needed properties from our chosen city object
+const assignmentFunction = (chosenCity) => {
+  app.placeName = chosenCity[0].name;
+  app.countryCode = chosenCity[0].c;
+  app.latitude = chosenCity[0].lat;
+  app.longitude = chosenCity[0].lon;
+
+  // app.dashboardAPICalls(app.countryCode, app.latitude, app.longitude);
+}
+
+app.dashboardAPICalls = async function (cityName, latitude, longitude) {
+  const news = await app.getNews(cityName);
+  const time = await app.getTimezone(latitude, longitude);
+  const weather = await app.getWeather(latitude, longitude);
+  // console.log(news, time, weather)
+}
 
 // function for ajax call to get information about city based on city name
 app.getCityInfo = function (cityName) {
@@ -73,72 +139,6 @@ app.getWeather = function (latitude, longitude) {
   });
 };
 
-app.chosenCity = [];
-
-// function to determine the correct object that holds the city information which matches user search
-app.findCityAPICall = async function (cityName) {
-  // this will run ajax call and return an array of cities which matches the user input
-  let cityInfo = await app.getCityInfo(cityName);
-  app.handleCityInfo(cityInfo);
-};
-
-app.handleCityInfo = function(cityInfo) {
-  cityInfo.Results.forEach((city) => {
-    if (city.name.includes(`null`)) {
-      city.name = city.name.replace(`(null)`, city.c)
-    }
-  });
-  if (cityInfo.Results.length > 1) {
-    // renders all cities that matches user input to the DOM
-    app.renderCityList(cityInfo);
-    app.chooseCityFromList(cityInfo);
-  } else {
-    app.chosenCity = cityInfo.Results
-    assignmentFunction(app.chosenCity);
-  }
-}
-
-// function to print list of cities on page that match user input
-app.renderCityList = function(cityInfo) {
-  cityInfo.Results.forEach((city) => {
-    const liHTML = `<li><a>${city.name}</a></li>`
-    // prints each city as a list item on page
-    $('.cityOptions').append(liHTML);
-  })
-}
-
-// function to listen for which matched city the user clicks on
-app.chooseCityFromList = function (cityInfo) {
-  $('.cityOptions').on('click', 'li', function () {
-    app.chosenCity = cityInfo.Results.filter((city) => {
-      return city.name === $(this).text();
-    });
-    console.log(app.chosenCity);
-    assignmentFunction(app.chosenCity);
-  });
-}
-
-
-
-  
-
-
-// assignment function to grab the needed properties from our chosen city object
-const assignmentFunction = (chosenCity) => {
-  app.placeName = chosenCity[0].name;
-  app.countryCode = chosenCity[0].c;
-  app.latitude = chosenCity[0].lat;
-  app.longitude = chosenCity[0].lon;
-
-  // app.dashboardAPICalls(app.countryCode, app.latitude, app.longitude);
-}
-
-app.dashboardAPICalls = async function (cityName, latitude, longitude) {
-  const news = await app.getNews(cityName);
-  const time = await app.getTimezone(latitude, longitude);
-  const weather = await app.getWeather(latitude, longitude);
-  // console.log(news, time, weather)
-}
 
 
 app.init = function () {
