@@ -10,26 +10,40 @@
 </head>
 
 <body>
-  <section class="search">
+  <header class="search">
+    <nav class="headerNav">logo</nav>
+    <h1>Follow me to</h1>
     <form action="">
-      <label for="cityName" class="visuallyHidden">Enter city name</label>
-      <input type="text" placeholder="enter city name" id="cityName">
-      <input type="submit" id="submitButton" value="Search" class="submitButton">
+      <label for="citySearch" class="visuallyHidden">Search a city name</label>
+      <input type="text" placeholder="search a city" id="citySearch">
+      <input type="submit" id="submitButton" value="hit enter to go to" class="submitButton">
     </form>
+    
+  </header>
+  <section class="cityList">
     <div class="cityOptionsContainer">
       <ul class="cityOptions"></ul>
     </div>
   </section>
+  <section class="cityHeader">
+    
+  </section>
 
   <main class="dashboard">
-    <div class="dateTime dashSection">
-
-    </div>
-    <div class="weather dashSection">
-
-    </div>
-    <div class="news dashSection">
-
+    <div class="dashboardWrapper">
+      <div class="dashboardLeft">
+        <div class="cityName dashSection">
+          <p>asfasf</p>
+        </div>
+        <div class="news dashSection">
+        </div>
+      </div>
+      <div class="dashboardRight">
+        <div class="dateTime dashSection">
+        </div>
+        <div class="weather dashSection">
+        </div>
+      </div>
     </div>
   </main>
   <footer>

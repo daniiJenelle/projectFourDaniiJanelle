@@ -1,0 +1,14 @@
+
+.dashboardWrapper {
+    display: flex;
+}
+
+.dashboardLeft, .dashboardRight {
+    width: 50%;
+    height: 100vh;
+    border: 2px solid tomato;
+}
+
+.dashSection {
+    border: 2px solid tomato;
+}

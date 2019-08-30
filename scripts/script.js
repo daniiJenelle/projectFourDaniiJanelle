@@ -138,7 +138,6 @@ app.getWeather = function (latitude, longitude) {
 };
 
 
-
 app.init = function () {
   app.formSubmit();
 };
