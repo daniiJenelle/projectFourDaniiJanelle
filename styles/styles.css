@@ -182,4 +182,34 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 html {
   font-size: 62.5%;
 }
+
+@font-face {
+  font-family: "Campton";
+  font-weight: "600";
+  src: url("../assets/fonts/campton-medium.eot");
+  src: url("../assets/fonts/campton-medium.woff") format("woff"), url("../assets/fonts/campton-medium.woff2") format("woff2"), url("../assets/fonts/campton-medium.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "Campton";
+  font-weight: "800";
+  src: url("../assets/fonts/campton-semibold.eot");
+  src: url("../assets/fonts/campton-semibold.woff") format("woff"), url("../assets/fonts/campton-semibold.woff2") format("woff2"), url("../assets/fonts/campton-semibold.ttf") format("opentype");
+}
+
+.dashboardWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dashboardLeft, .dashboardRight {
+  width: 50%;
+  height: 100vh;
+  border: 2px solid tomato;
+}
+
+.dashSection {
+  border: 2px solid tomato;
+}
 /*# sourceMappingURL=styles.css.map */
