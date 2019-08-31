@@ -210,6 +210,22 @@ html {
 }
 
 .dashSection {
-  border: 2px solid tomato;
+  border: 2px solid green;
+}
+
+.cityName {
+  height: 20%;
+}
+
+.dateTime {
+  height: 40%;
+}
+
+.weather {
+  height: 20%;
+}
+
+.cityPhoto {
+  height: 40%;
 }
 /*# sourceMappingURL=styles.css.map */
