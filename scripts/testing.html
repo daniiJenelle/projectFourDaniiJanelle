@@ -11,20 +11,11 @@
 <body>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
   <script>
-    $.ajax({
-      url: `http://api.timezonedb.com/v2.1/get-time-zone`,
-      method: 'GET',
-      dataType: 'json',
-      data: {
-        key: '8EZVCD1H71OJ',
-        format: 'json',
-        by: 'position',
-        lat: 22,
-        lng: 114
-      }
-    }).then((res) => {
-      console.log(res)
-    })
+    const functionName = async function(merp) {
+      console.log(merp);
+    }
+
+    functionName(2);
 
   </script>
 </body>
