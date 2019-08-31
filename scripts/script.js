@@ -66,14 +66,14 @@ const assignmentFunction = (chosenCity) => {
   app.latitude = chosenCity[0].lat;
   app.longitude = chosenCity[0].lon;
 
-  // app.dashboardAPICalls(app.countryCode, app.latitude, app.longitude);
+  app.dashboardAPICalls(app.countryCode, app.latitude, app.longitude);
 }
 
 app.dashboardAPICalls = async function (cityName, latitude, longitude) {
   const news = await app.getNews(cityName);
   const time = await app.getTimezone(latitude, longitude);
   const weather = await app.getWeather(latitude, longitude);
-  // console.log(news, time, weather)
+  console.log(news, time, weather)
 }
 
 // function for ajax call to get information about city based on city name
@@ -136,6 +136,12 @@ app.getWeather = function (latitude, longitude) {
     }
   });
 };
+
+// function to render ajax calls to the dashboard
+// app.displayDashboard = function(article) {
+//   $(`.news`).html(`${article.response.docs}`)
+// }
+
 
 
 app.init = function () {
