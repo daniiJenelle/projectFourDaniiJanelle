@@ -9,3 +9,13 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 html {
   font-size: 62.5%;
 }
+
+h1,
+h2,
+h3, 
+div,
+ul,
+p {
+  margin: 0; 
+  padding: 0;
+}
