@@ -342,6 +342,9 @@ header .searchHint.showEl {
 
 .dashSection {
   border: 2px solid green;
+  -o-object-fit: cover;
+     object-fit: cover;
+  overflow: hidden;
 }
 
 .cityName {
@@ -370,7 +373,7 @@ header .searchHint.showEl {
 }
 
 .weather {
-  height: 40%;
+  height: 30%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -385,6 +388,6 @@ header .searchHint.showEl {
 }
 
 .cityPhoto {
-  height: 40%;
+  height: 50%;
 }
 /*# sourceMappingURL=styles.css.map */
