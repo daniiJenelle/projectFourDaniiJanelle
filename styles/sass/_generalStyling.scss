@@ -1,14 +1,47 @@
 @font-face {
-  font-family: "Campton";
-  font-weight: "600";
-  src: url("../assets/fonts/campton-medium.eot");
-  src: url("../assets/fonts/campton-medium.woff") format("woff"), url("../assets/fonts/campton-medium.woff2") format("woff2"), url("../assets/fonts/campton-medium.ttf") format("opentype");
+  font-family: "Campton Medium";
+  src: url("../assets/fonts/campton-medium/Campton-Medium.eot");
+  src: url("../assets/fonts/campton-medium/campton-medium.woff") format("woff"), url("../assets/fonts/campton-medium/campton-medium.woff2") format("woff2"), url("../assets/fonts/campton-medium/campton-medium.ttf") format("opentype");
 }
 
 @font-face {
-  font-family: "Campton";
-  font-weight: "800";
-  src: url("../assets/fonts/campton-semibold.eot");
-  src: url("../assets/fonts/campton-semibold.woff") format("woff"), url("../assets/fonts/campton-semibold.woff2") format("woff2"), url("../assets/fonts/campton-semibold.ttf") format("opentype");
+  font-family: "Campton Semibold";
+  src: url("../assets/fonts/campton-semibold/campton-semibold.eot");
+  src: url("../assets/fonts/campton-semibold/campton-semibold.woff") format("woff"), url("../assets/fonts/campton-semibold/campton-semibold.woff2") format("woff2"), url("../assets/fonts/campton-semibold/campton-semibold.ttf") format("opentype");
 }
 
+// GLOBAL VARIABLES
+$black: #000;
+
+// MIXINS
+@mixin wrapper($max-width: 1280px, $width: 85%, $margin: 0 auto) {
+  max-width: $max-width;
+  width: $width;
+  margin: $margin;
+  border: 1px solid red;
+}
+
+@mixin flexCenter($wrap: wrap, $justify-content: center, $align-items: center) {
+  display: flex;
+  flex-wrap: $wrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin posAbsFullScreen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+body {
+  background: #000;
+  color: #fff;
+}
+
+img {
+  width: 100%;
+  display: block;
+}

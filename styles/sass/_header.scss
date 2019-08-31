@@ -1,0 +1,66 @@
+header {
+  @include wrapper;
+  height: 100vh;
+  font-family: "Campton", sans-serif;
+  text-align: center;
+  
+  .container {
+    position: relative;
+    height: 100%;
+    @include flexCenter;
+    align-content: center;
+    margin-top: -3%;
+  }
+
+  h1 {
+    width: 100%;
+    font-size: 5.4rem;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  input {
+    width: 55%;
+    border: 0;
+    margin-top: -10px;
+    padding-bottom: 6px;
+    
+    background: transparent;
+    border-bottom: 3px solid transparent;
+    font-size: 8rem;
+    text-transform: lowercase;
+    color: $black;
+    text-align: center;
+    letter-spacing: 1.5px;
+    text-shadow: 1.5px 1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px 0px 0 #fff, 0px 1.5px 0 #fff, -1.5px 0px 0 #fff, 0px -1.5px 0 #fff;
+    transform: scale(1);
+    transition: transform 0.2s;
+
+    &::placeholder {
+      opacity: 0.5;
+      text-shadow: 1.5px 1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px 0px 0 #fff, 0px 1.5px 0 #fff, -1.5px 0px 0 #fff, 0px -1.5px 0 #fff;
+    }
+
+    &:focus {
+      transform: scale(1.2);
+      transform-origin: top center;
+    }
+  }
+
+  .searchHint {
+    font-size: 2rem;
+    color: #fff;
+    position: absolute;
+    bottom: 2%;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s;
+
+    &.showEl {
+      opacity: 1;
+    }
+  }
+}

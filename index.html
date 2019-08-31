@@ -11,14 +11,16 @@
 
 <body>
   <header class="search">
-    <nav class="headerNav">logo</nav>
-    <h1>Follow me to</h1>
-    <form action="">
-      <label for="citySearch" class="visuallyHidden">Search a city name</label>
-      <input type="text" placeholder="search a city" id="citySearch">
-      <input type="submit" id="submitButton" value="hit enter to go to" class="submitButton">
-    </form>
-    
+    <!-- <nav class="headerNav">logo</nav> -->
+    <div class="container">
+      <h1>take me to</h1>
+      <form>
+        <label for="citySearch" class="visuallyHidden">type a city name</label>
+        <input type="text" placeholder="type a city" id="citySearch" autocomplete="off">
+        <input type="button" id="submitButton" value="Search your city" class="visuallyHidden">
+      </form>
+      <span id="searchHint" class="searchHint">Hit enter to go</span>
+    </div>
   </header>
   <section class="cityList">
     <div class="cityOptionsContainer">
@@ -26,7 +28,7 @@
     </div>
   </section>
   <section class="cityHeader">
-    
+
   </section>
 
   <main class="dashboard">
@@ -45,8 +47,8 @@
         <div class="weather dashSection">
         </div>
         <div class="cityPhoto dashSection"></div>
-        </div>
       </div>
+    </div>
     </div>
   </main>
   <footer>

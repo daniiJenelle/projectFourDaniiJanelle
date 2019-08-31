@@ -183,18 +183,138 @@ html {
   font-size: 62.5%;
 }
 
-@font-face {
-  font-family: "Campton";
-  font-weight: "600";
-  src: url("../assets/fonts/campton-medium.eot");
-  src: url("../assets/fonts/campton-medium.woff") format("woff"), url("../assets/fonts/campton-medium.woff2") format("woff2"), url("../assets/fonts/campton-medium.ttf") format("opentype");
+h1,
+h2,
+h3,
+div,
+ul,
+p {
+  margin: 0;
+  padding: 0;
 }
 
 @font-face {
-  font-family: "Campton";
-  font-weight: "800";
-  src: url("../assets/fonts/campton-semibold.eot");
-  src: url("../assets/fonts/campton-semibold.woff") format("woff"), url("../assets/fonts/campton-semibold.woff2") format("woff2"), url("../assets/fonts/campton-semibold.ttf") format("opentype");
+  font-family: "Campton Medium";
+  src: url("../assets/fonts/campton-medium/Campton-Medium.eot");
+  src: url("../assets/fonts/campton-medium/campton-medium.woff") format("woff"), url("../assets/fonts/campton-medium/campton-medium.woff2") format("woff2"), url("../assets/fonts/campton-medium/campton-medium.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "Campton Semibold";
+  src: url("../assets/fonts/campton-semibold/campton-semibold.eot");
+  src: url("../assets/fonts/campton-semibold/campton-semibold.woff") format("woff"), url("../assets/fonts/campton-semibold/campton-semibold.woff2") format("woff2"), url("../assets/fonts/campton-semibold/campton-semibold.ttf") format("opentype");
+}
+
+body {
+  background: #000;
+  color: #fff;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+header {
+  max-width: 1280px;
+  width: 85%;
+  margin: 0 auto;
+  border: 1px solid red;
+  height: 100vh;
+  font-family: "Campton", sans-serif;
+  text-align: center;
+}
+
+header .container {
+  position: relative;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  margin-top: -3%;
+}
+
+header h1 {
+  width: 100%;
+  font-size: 5.4rem;
+}
+
+header form {
+  width: 100%;
+}
+
+header input {
+  width: 55%;
+  border: 0;
+  margin-top: -10px;
+  padding-bottom: 6px;
+  background: transparent;
+  border-bottom: 3px solid transparent;
+  font-size: 8rem;
+  text-transform: lowercase;
+  color: #000;
+  text-align: center;
+  letter-spacing: 1.5px;
+  text-shadow: 1.5px 1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px 0px 0 #fff, 0px 1.5px 0 #fff, -1.5px 0px 0 #fff, 0px -1.5px 0 #fff;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+}
+
+header input::-webkit-input-placeholder {
+  opacity: 0.5;
+  text-shadow: 1.5px 1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px 0px 0 #fff, 0px 1.5px 0 #fff, -1.5px 0px 0 #fff, 0px -1.5px 0 #fff;
+}
+
+header input:-ms-input-placeholder {
+  opacity: 0.5;
+  text-shadow: 1.5px 1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px 0px 0 #fff, 0px 1.5px 0 #fff, -1.5px 0px 0 #fff, 0px -1.5px 0 #fff;
+}
+
+header input::-ms-input-placeholder {
+  opacity: 0.5;
+  text-shadow: 1.5px 1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px 0px 0 #fff, 0px 1.5px 0 #fff, -1.5px 0px 0 #fff, 0px -1.5px 0 #fff;
+}
+
+header input::placeholder {
+  opacity: 0.5;
+  text-shadow: 1.5px 1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px 0px 0 #fff, 0px 1.5px 0 #fff, -1.5px 0px 0 #fff, 0px -1.5px 0 #fff;
+}
+
+header input:focus {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -webkit-transform-origin: top center;
+          transform-origin: top center;
+}
+
+header .searchHint {
+  font-size: 2rem;
+  color: #fff;
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+header .searchHint.showEl {
+  opacity: 1;
 }
 
 .dashboardWrapper {

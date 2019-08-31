@@ -27,13 +27,30 @@ app.getCityInfo = function (chosenCity) {
     method: 'GET',
     dataType: 'json',
     data: {
-      apikey: 'T18lCvOwKFBANPDKG6JET6LQJ6TrHwrO',
+      apikey: 'Jip3xwxEAw8IjDBc09F3cVCUABRgzrl6',
       q: chosenCity
     }
   });
 }; // AJAX METHODS END
 
 // METHODS START
+
+// listen for what user is typing in the input to show as search hint
+app.searchHint = function () {
+  $('#citySearch').keyup(e => {
+    const userInput = $('#citySearch').val();
+    console.log(userInput.length);
+    $('#searchHint').text(`hit enter to go to ${userInput}`);
+
+    if (userInput.length > 2) {
+      console.log('add class');
+      $('#searchHint').addClass('showEl')
+    } else {
+      $('#searchHint').removeClass('showEl')
+    }
+
+  })
+}
 
 // listen for form submit when the user searches for a city name
 app.formSubmit = function () {
@@ -105,6 +122,7 @@ app.searchHandleCityInfo = async function (chosenCity) {
 // INIT FUNCTION
 app.init = function () {
   app.formSubmit();
+  app.searchHint();
 };
 
 // DOCUMENT READY
