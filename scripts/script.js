@@ -159,12 +159,13 @@ app.chooseCityFromList = function (matchedCities) {
   $('.cityOptions').on('click', 'li', function () {
     app.chosenCityName = matchedCities.filter((city) => {
       return city === $(this).text();
-    })
+    })[0].replace(/,.*?,/, '')
 
-    if (app.chosenCityName[0].includes(`,()`)) {
-      app.chosenCityName = app.chosenCityName[0].replace(/,.*?,/, '');
-      console.log(app.chosenCityName)
-    }
+    // if (app.chosenCityName[0].includes(`,()`)) {
+    //   console.log(app.chosenCityName)
+    //   app.chosenCityName = app.chosenCityName[0].replace(/,.*?,/, '');
+    //   console.log(app.chosenCityName)
+    // }
     
     console.log('User has selected this city', app.chosenCityName)
     app.searchHandleCityInfo(app.chosenCityName);
@@ -187,7 +188,7 @@ app.searchHandleCityInfo = async function (chosenCity) {
   app.latitude = chosenCityInfo[0].GeoPosition.Latitude;
   app.longitude = chosenCityInfo[0].GeoPosition.Longitude;
 
-  console.log(app.officialCityName, app.latitude, app.longitude);
+  console.log(app.officialCityName, app.countryName, app.latitude, app.longitude);
   app.dashboardAPICalls(app.officialCityName, app.countryName, app.latitude, app.longitude);
 }
 
@@ -196,9 +197,13 @@ app.displayNewsDashboard = function (news) {
   news.response.docs.forEach(function (article) {
     const articleTitle = article.headline.main
     const articleAbstract = article.abstract
-    const articleImage = `https://www.nytimes.com/` + `${article.multimedia[0].url}`
     const articleLink = article.web_url
-  $(`.news`).append(`<a href="${articleLink}" class="singleArticle"><img src="${articleImage}" alt=""><h3>${articleTitle}</h3><p>${articleAbstract}</p></a>`);
+    let articleImage = ''
+    if (article.multimedia[0] != undefined && article.multimedia.length != 1) {
+      articleImage = `https://www.nytimes.com/` + `${article.multimedia[0].url}`
+    }
+    
+    $(`.news`).append(`<a href="${articleLink}" class="singleArticle"><img src="${articleImage}" alt=""><h3>${articleTitle}</h3><p>${articleAbstract}</p></a>`);
   });
 }
 
