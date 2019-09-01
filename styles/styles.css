@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'Campton Medium';
+  src: url("assets/fonts/campton-medium/Campton-Medium.eot");
+  /* IE9 Compat Modes */
+  src: url("assets/fonts/campton-medium/Campton-Medium.eot?#iefix") format("embedded-opentype"), url("assets/fonts/campton-medium/Campton-Medium.woff2") format("woff2"), url("assets/fonts/campton-medium/Campton-Medium.woff") format("woff"), url("assets/fonts/campton-medium/Campton-Medium.ttf") format("truetype"), url("assets/fonts/campton-medium/Campton-Medium.svg#Campton-Medium") format("svg");
+  /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'Campton Semibold';
+  src: url("assets/fonts/campton-semibold/Campton-SemiBold.eot");
+  /* IE9 Compat Modes */
+  src: url("assets/fonts/campton-semibold/Campton-SemiBold.eot?#iefix") format("embedded-opentype"), url("assets/fonts/campton-semibold/Campton-SemiBold.woff2") format("woff2"), url("assets/fonts/campton-semibold/Campton-SemiBold.woff") format("woff"), url("assets/fonts/campton-semibold/Campton-SemiBold.ttf") format("truetype"), url("assets/fonts/campton-semibold/Campton-SemiBold.svg#Campton-SemiBold") format("svg");
+  /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'Campton Bold';
+  src: url("assets/fonts/campton-bold/Campton-Bold.eot");
+  /* IE9 Compat Modes */
+  src: url("assets/fonts/campton-bold/Campton-Bold.eot?#iefix") format("embedded-opentype"), url("assets/fonts/campton-bold/Campton-Bold.woff2") format("woff2"), url("assets/fonts/campton-bold/Campton-Bold.woff") format("woff"), url("assets/fonts/campton-bold/Campton-Bold.ttf") format("truetype"), url("assets/fonts/campton-bold/Campton-Bold.svg#Campton-Bold") format("svg");
+  /* Legacy iOS */
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block;
 }
@@ -193,26 +217,6 @@ p {
   padding: 0;
 }
 
-@font-face {
-  font-family: 'Campton Medium';
-  src: url("assets/fonts/campton-medium/Campton-Medium.eot");
-  /* IE9 Compat Modes */
-  src: url("assets/fonts/campton-medium/Campton-Medium.eot?#iefix") format("embedded-opentype"), url("assets/fonts/campton-medium/Campton-Medium.woff2") format("woff2"), url("assets/fonts/campton-medium/Campton-Medium.woff") format("woff"), url("assets/fonts/campton-medium/Campton-Medium.ttf") format("truetype"), url("assets/fonts/campton-medium/Campton-Medium.svg#Campton-Medium") format("svg");
-  /* Legacy iOS */
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Campton Semibold';
-  src: url("assets/fonts/campton-semibold/Campton-SemiBold.eot");
-  /* IE9 Compat Modes */
-  src: url("assets/fonts/campton-semibold/Campton-SemiBold.eot?#iefix") format("embedded-opentype"), url("assets/fonts/campton-semibold/Campton-SemiBold.woff2") format("woff2"), url("assets/fonts/campton-semibold/Campton-SemiBold.woff") format("woff"), url("assets/fonts/campton-semibold/Campton-SemiBold.ttf") format("truetype"), url("assets/fonts/campton-semibold/Campton-SemiBold.svg#Campton-SemiBold") format("svg");
-  /* Legacy iOS */
-  font-weight: 600;
-  font-style: normal;
-}
-
 img {
   width: 100%;
   display: block;
@@ -224,14 +228,20 @@ body {
 }
 
 header {
+  width: 100vw;
   height: 100vh;
+  overflow: hidden;
   background: #000;
   text-align: center;
   -webkit-transition: background 0.7s;
   transition: background 0.7s;
 }
 
-header .container {
+header.changeBackground {
+  background: #000;
+}
+
+header .wrapper {
   max-width: 1280px;
   width: 85%;
   margin: 0 auto;
@@ -245,72 +255,122 @@ header .container {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -ms-flex-line-pack: center;
       align-content: center;
+  border: 1px solid red;
+}
+
+@media (max-width: 480px) {
+  header .wrapper {
+    width: 90%;
+  }
 }
 
 header h1 {
-  font-family: "Campton Semibold", sans-serif;
-  font-weight: 600;
-  position: absolute;
-  top: 37vh;
+  font-family: "Campton Medium", sans-serif;
+  font-size: 4.8em;
+  letter-spacing: 1px;
+  color: #E7E6E6;
   width: 100%;
-  font-size: 3.6rem;
-  color: #fff;
-  -webkit-transition: font-size 0.3s ease-out, top 0.8s ease-out;
-  transition: font-size 0.3s ease-out, top 0.8s ease-out;
+  margin-bottom: 0.5rem;
+  position: relative;
+  top: 0;
+  -webkit-transition: font-size 0.3s ease-out, top 1s ease-out;
+  transition: font-size 0.3s ease-out, top 1s ease-out;
+}
+
+@media (max-width: 1280px) {
+  header h1 {
+    font-size: calc(3.2rem + (48 - 32) * (100vw - 320px) / (1280 - 320));
+  }
 }
 
 header h1.shiftUp {
-  top: 5vh;
-  font-size: 2rem;
+  position: relative;
+  top: -35%;
+  font-family: "Campton Medium", sans-serif;
+  font-size: 2.8rem;
 }
 
 header form {
   width: 100%;
 }
 
-header input {
+header input[type="text"] {
   width: 80%;
   border: 0;
-  margin-top: -10px;
-  padding-bottom: 4px;
+  padding-bottom: 30px;
   background: transparent;
   border-bottom: 2px solid transparent;
-  font-family: "Campton Semibold", sans-serif;
-  font-size: 8rem;
+  font-family: "Campton Bold", sans-serif;
+  font-size: 10rem;
   letter-spacing: 1.5px;
   text-align: center;
   color: transparent;
-  -webkit-text-stroke: 2px #fff;
+  -webkit-text-stroke: 2px #E7E6E6;
   text-transform: lowercase;
-  caret-color: #fff;
-  -webkit-transition: border-bottom 1s, padding-bottom 1s;
-  transition: border-bottom 1s, padding-bottom 1s;
+  caret-color: #E7E6E6;
+  -webkit-transition: border-bottom 0.3s, padding-bottom 0.3s;
+  transition: border-bottom 0.3s, padding-bottom 0.3s;
 }
 
-header input::-webkit-input-placeholder {
+@media (max-width: 1280px) {
+  header input[type="text"] {
+    font-size: calc(3.2rem + (100 - 32) * (100vw - 320px) / (1280 - 320));
+  }
+}
+
+@media (max-width: 480px) {
+  header input[type="text"] {
+    font-family: "Campton Semibold", sans-serif;
+    width: 100%;
+    color: #E7E6E6;
+    -webkit-text-stroke-width: 0px;
+  }
+}
+
+header input[type="text"]::-webkit-input-placeholder {
   opacity: 0.5;
 }
 
-header input:-ms-input-placeholder {
+header input[type="text"]:-ms-input-placeholder {
   opacity: 0.5;
 }
 
-header input::-ms-input-placeholder {
+header input[type="text"]::-ms-input-placeholder {
   opacity: 0.5;
 }
 
-header input::placeholder {
+header input[type="text"]::placeholder {
   opacity: 0.5;
 }
 
-header input:focus {
-  border-color: #fff;
-  padding-bottom: 12px;
+@media (max-width: 480px) {
+  header input[type="text"]::-webkit-input-placeholder {
+    font-family: "Campton Semibold", sans-serif;
+    width: 100%;
+    -webkit-text-stroke-width: 0px;
+  }
+  header input[type="text"]:-ms-input-placeholder {
+    font-family: "Campton Semibold", sans-serif;
+    width: 100%;
+    -webkit-text-stroke-width: 0px;
+  }
+  header input[type="text"]::-ms-input-placeholder {
+    font-family: "Campton Semibold", sans-serif;
+    width: 100%;
+    -webkit-text-stroke-width: 0px;
+  }
+  header input[type="text"]::placeholder {
+    font-family: "Campton Semibold", sans-serif;
+    width: 100%;
+    -webkit-text-stroke-width: 0px;
+  }
+}
+
+header input[type="text"]:focus {
+  border-color: #E7E6E6;
+  padding-bottom: 2px;
 }
 
 header input[type="button"] {
@@ -335,24 +395,15 @@ header .searchHint {
   transition: opacity 0.5s;
 }
 
-header .searchHint.showEl {
+header .searchHint.showHint {
   opacity: 1;
 }
 
-header .searchHint.hideEl {
+header .searchHint.hideHint {
   opacity: 0;
 }
 
 .cityList {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  display: none;
-}
-
-.cityList.revealPopUp {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -362,16 +413,28 @@ header .searchHint.hideEl {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  border: 5px solid red;
+  visibility: hidden;
+}
+
+.cityList.visibilityChange {
+  visibility: visible;
 }
 
 .cityOptions {
-  list-style: none;
+  width: 85vw;
+  height: 73vh;
+  background: #000;
+  border: 5px solid #E7E6E6;
   font-family: "Campton Semibold", sans-serif;
   font-size: 4.5rem;
-  background: #000;
-  width: 85%;
-  height: 80vh;
   text-align: center;
+  list-style: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -380,9 +443,20 @@ header .searchHint.hideEl {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  overflow-y: scroll;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
+  opacity: 0;
+  -webkit-animation-duration: 0.6s;
+          animation-duration: 0.6s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  padding: 2% 0 100px;
+}
+
+.cityOptions.opacityChange {
+  opacity: 1;
 }
 
 .cityOptions li {
@@ -398,20 +472,40 @@ header .searchHint.hideEl {
           transform: scale(1.05);
 }
 
-.cityOptions a {
+.cityOptions li a {
   font-family: "Campton Medium", sans-serif;
+  letter-spacing: 1px;
   margin: 0 auto;
   text-transform: lowercase;
   color: transparent;
-  -webkit-text-stroke: 1.3px #fff;
+  -webkit-text-stroke: 1.3px #E7E6E6;
   -webkit-transition: all 0.35s;
   transition: all 0.35s;
 }
 
-.cityOptions a:hover {
+.cityOptions li a:hover {
   cursor: pointer;
-  color: #fff;
-  -webkit-text-stroke: 0.8px #fff;
+  color: #E7E6E6;
+  -webkit-text-stroke: 0.8px #E7E6E6;
+}
+
+.cityOptions i {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 100;
+  font-size: 4.5rem;
+  color: white;
+  cursor: pointer;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.cityOptions i:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 
 .dashboard {

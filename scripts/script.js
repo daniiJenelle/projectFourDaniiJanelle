@@ -104,16 +104,15 @@ app.getPhoto = function (cityName, countryName) {
 app.checkUserInput = function () {
   $('form').keyup(e => {
     app.userInput = $(`:text`).val();
-    console.log(app.userInput)
 
     if (app.userInput.length <= 2 && e.key === 'Enter') {
-      $('#searchHint').text(`Enter a city name with 3 or more letters`);
-      $('#searchHint').addClass('showEl');
+      $('#searchHint').text(`enter a city name with 3 or more letters`);
+      $('#searchHint').addClass('showHint');
     } else if (app.userInput.length >= 3 && e.key !== 'Enter') {
-      $('#searchHint').text(`Hit enter to search ${app.userInput}`);
-      $('#searchHint').addClass('showEl');
+      $('#searchHint').text(`hit enter to search ${app.userInput}`);
+      $('#searchHint').addClass('showHint');
     } else if (e.key !== 'Enter') {
-      $('#searchHint').removeClass('showEl');
+      $('#searchHint').removeClass('showHint');
     }
   });
 
@@ -134,14 +133,20 @@ app.formSubmit = function () {
 app.searchCityAutocomplete = async function (cityName) {
   try {
     let matchedCities = await app.getCityNames(cityName);
-    console.log(matchedCities);
 
     if (matchedCities[0] === '' || matchedCities.length === 0) {
       console.log('city does not exist');
-      $('#searchHint').text('No results found. Try again.');
+      $('#searchHint').text('no results found. try again.');
       return
     }
 
+    setTimeout(() => {
+      $('#searchHint').text('');
+    }, 1000);
+
+    $('header').addClass('changeBackground');
+    $('#searchHint').removeClass('showHint');
+    app.takeMeToAnimation();
     app.handleMatchedCities(matchedCities);
 
   } catch (error) {
@@ -149,10 +154,27 @@ app.searchCityAutocomplete = async function (cityName) {
   }
 }
 
-/// checks data from returned city names
+// animation for h1 to slide up
+app.takeMeToAnimation = function () {
+  const userInputLetters = app.userInput.split('')
+  userInputLetters.unshift(' ');
+
+  $('h1')[0].innerHTML = 'taking you to'
+
+  userInputLetters.forEach(function (letter, index) {
+    setTimeout(function () {
+      $('h1')[0].innerHTML += letter;
+    }, 100 * (index + 1));
+  });
+
+  setTimeout(() => {
+    $('h1').addClass('shiftUp');
+  }, 1000);
+}
+
+// checks data from returned city names
 app.handleMatchedCities = function (matchedCities) {
   if (matchedCities.length > 1) {
-    $('#cityList').addClass('revealPopUp');
     // render all cities that matches user input to the DOM
     app.renderMatchedCitiesList(matchedCities);
     app.chooseCityFromList(matchedCities);
@@ -169,8 +191,30 @@ app.renderMatchedCitiesList = function (matchedCities) {
     const liHTML = `<li><a>${city}</a></li>`
     // prints each city as a list item on page
     $('.cityOptions').append(liHTML);
-  })
+  });
+
+  app.popUpModalAnimation();
 }
+
+// pop up modal that shows list of cities
+app.popUpModalAnimation = function () {
+  setTimeout(() => {
+    $('#cityList').addClass('visibilityChange');
+    $('.cityOptions').addClass('zoomIn').addClass('opacityChange');
+
+    // listening for click on X to close the pop up modal
+    $('#closeCross').click(() => {
+      $('.cityOptions').removeClass('zoomIn').addClass('zoomOut').removeClass('opacityChange');
+      $('#cityList').removeClass('visibilityChange');
+      $('.cityOptions').html(`<a href="#" id="closeCross"><i class="far fa-times-circle"></i></a>`);
+      $('#searchHint').text(`hit enter to search ${app.userInput}`);
+      $('#searchHint').addClass('showHint');
+      $('h1').removeClass('shiftUp');
+      $('h1')[0].innerHTML = 'take me to';
+      $('.cityOptions').removeClass('zoomOut');
+    });
+  }, 2000);
+};
 
 // listen for which matched city the user clicks on
 app.chooseCityFromList = function (matchedCities) {
@@ -225,7 +269,7 @@ app.displayWeatherDashboard = function (weather, timezone) {
   const tempMax = Math.round(weather.main.temp_max)
   console.log(timezone)
   const sunrise = new Date(weather.sys.sunrise * 1000)
-  const sunset = new Date (weather.sys.sunset * 1000)
+  const sunset = new Date(weather.sys.sunset * 1000)
   console.log(sunrise)
 
   $(`.weather`).append(`<div><p class="temperature">${temperature}°C</p><p class="minMax">${tempMax} / ${tempMin}</p></div><div><h3>${weatherTitle}</h3><p>Sunrise: ${sunrise.toLocaleTimeString()}</p><p>Sunset: ${sunset.toLocaleTimeString()}</div><div><img class="weatherIcon" src="${weatherIcon}"></div>`)
@@ -239,7 +283,7 @@ app.displayTimeDashboard = function (time) {
 
 // function to render photo ajax call to the dashboard
 app.displayPhotoDashboard = function (photo) {
-  const photoURL = photo.hits[0].webformatURL
+  const photoURL = photo.hits[1].webformatURL
 
   $(`.cityPhoto`).css(`background-image`, `url(${photoURL}`)
 }
