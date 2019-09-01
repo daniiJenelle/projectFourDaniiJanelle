@@ -1,6 +1,6 @@
 app = {};
 app.chosenCityName = '';
-// app.chosenCityInfo = [];
+app.userInput = '';
 
 // AJAX METHODS START
 
@@ -31,7 +31,7 @@ app.getCityInfo = function (chosenCity) {
       q: chosenCity
     }
   });
-}; 
+};
 
 // funtion for ajax call to get news based on country code
 app.getNews = function (cityName, countryName) {
@@ -77,13 +77,13 @@ app.getWeather = function (latitude, longitude) {
       units: 'metric'
     }
   });
-}; 
+};
 
 // function for ajax call to get photo for location
 app.getPhoto = function (cityName, countryName) {
   return $.ajax({
     url: `https://pixabay.com/api/`,
-    
+
     method: `GET`,
     dataType: `json`,
     data: {
@@ -95,46 +95,63 @@ app.getPhoto = function (cityName, countryName) {
     }
   })
 }
-
 // AJAX METHODS END
 
 // METHODS START
 
 // listen for what user is typing in the input to show as search hint
-app.searchHint = function () {
-  $('#citySearch').keyup(e => {
-    const userInput = $('#citySearch').val();
-    $('#searchHint').text(`hit enter to go to ${userInput}`);
-    if (userInput.length > 2) {
-      $('#searchHint').addClass('showEl')
-    } else {
-      $('#searchHint').removeClass('showEl')
+app.checkUserInput = function () {
+  $('form').keyup(e => {
+    app.userInput = $(`:text`).val();
+    console.log(app.userInput)
+
+    if (app.userInput.length <= 2 && e.key === 'Enter') {
+      $('#searchHint').text(`Enter a city name with 3 or more letters`);
+      $('#searchHint').addClass('showEl');
+    } else if (app.userInput.length >= 3 && e.key !== 'Enter') {
+      $('#searchHint').text(`Hit enter to search ${app.userInput}`);
+      $('#searchHint').addClass('showEl');
+    } else if (e.key !== 'Enter') {
+      $('#searchHint').removeClass('showEl');
     }
-  })
-}
+  });
+
+  app.formSubmit();
+};
 
 // listen for form submit when the user searches for a city name
 app.formSubmit = function () {
-  $(`form`).on(`submit`, function (e) {
+  $('form').submit(e => {
     e.preventDefault();
-    $('.cityOptions').empty();
-    app.chosenCity = [];
-
-    let cityName = ($(`:text`).val());
-    app.searchCityAutocomplete(cityName)
+    if (app.userInput.length >= 3) {
+      app.searchCityAutocomplete(app.userInput);
+    };
   });
-};
+}
 
 // invokes search to returned city names which match search query
 app.searchCityAutocomplete = async function (cityName) {
-  let matchedCities = await app.getCityNames(cityName);
-  console.log('FRESHLY RETRIEVED DATA', matchedCities);
-  app.handleMatchedCities(matchedCities);
-};
+  try {
+    let matchedCities = await app.getCityNames(cityName);
+    console.log(matchedCities);
 
-// checks data from returned city names
+    if (matchedCities[0] === '' || matchedCities.length === 0) {
+      console.log('city does not exist');
+      $('#searchHint').text('No results found. Try again.');
+      return
+    }
+
+    app.handleMatchedCities(matchedCities);
+
+  } catch (error) {
+    alert('⚠️ API is not working... so go home and sleep. 🔥')
+  }
+}
+
+/// checks data from returned city names
 app.handleMatchedCities = function (matchedCities) {
   if (matchedCities.length > 1) {
+    $('#cityList').addClass('revealPopUp');
     // render all cities that matches user input to the DOM
     app.renderMatchedCitiesList(matchedCities);
     app.chooseCityFromList(matchedCities);
@@ -166,7 +183,7 @@ app.chooseCityFromList = function (matchedCities) {
     //   app.chosenCityName = app.chosenCityName[0].replace(/,.*?,/, '');
     //   console.log(app.chosenCityName)
     // }
-    
+
     console.log('User has selected this city', app.chosenCityName)
     app.searchHandleCityInfo(app.chosenCityName);
     $('.cityOptions').off();
@@ -174,7 +191,7 @@ app.chooseCityFromList = function (matchedCities) {
 }
 
 app.cleanInput = function (chosenCityName) {
-  
+
 }
 
 // use chosen city to invoke search to retrieve city information
@@ -202,7 +219,7 @@ app.displayNewsDashboard = function (news) {
     if (article.multimedia[0] != undefined && article.multimedia.length != 1) {
       articleImage = `https://www.nytimes.com/` + `${article.multimedia[0].url}`
     }
-    
+
     $(`.news`).append(`<a href="${articleLink}" class="singleArticle"><img src="${articleImage}" alt=""><h3>${articleTitle}</h3><p>${articleAbstract}</p></a>`);
   });
 }
@@ -250,7 +267,7 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
   const photo = await app.getPhoto(officialCityName, countryName);
 
   $(`.cityName h1`).append(`<p>${officialCityName}</p><p>${countryName}</p>`)
-  
+
   app.displayNewsDashboard(news);
   app.displayWeatherDashboard(weather);
   app.displayTimeDashboard(weather);
@@ -259,13 +276,10 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
 
 // INIT FUNCTION
 app.init = function () {
-  app.formSubmit();
-  app.searchHint();
+  app.checkUserInput();
 };
 
 // DOCUMENT READY
 $(function () {
   app.init()
-
-
 });

@@ -14,21 +14,17 @@
     <!-- <nav class="headerNav">logo</nav> -->
     <div class="container">
       <h1>take me to</h1>
-      <form>
+      <form id="citySearchForm">
         <label for="citySearch" class="visuallyHidden">type a city name</label>
-        <input type="text" placeholder="type a city" id="citySearch" autocomplete="off">
+        <input type="text" placeholder="type city name" id="citySearch" autocomplete="off">
         <input type="button" id="submitButton" value="Search your city" class="visuallyHidden">
       </form>
       <span id="searchHint" class="searchHint">Hit enter to go</span>
     </div>
   </header>
-  <section class="cityList">
-    <div class="cityOptionsContainer">
-      <ul class="cityOptions"></ul>
-    </div>
-  </section>
-  <section class="cityHeader">
 
+  <section class="cityList" id="cityList">
+    <ul class="cityOptions"></ul>
   </section>
 
   <main class="dashboard">
