@@ -1,32 +1,7 @@
-// IMPORT FONTS
-@font-face {
-    font-family: 'Campton Medium';
-    src: url('assets/fonts/campton-medium/Campton-Medium.eot'); /* IE9 Compat Modes */
-    src: url('assets/fonts/campton-medium/Campton-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-        url('assets/fonts/campton-medium/Campton-Medium.woff2') format('woff2'), /* Super Modern Browsers */
-        url('assets/fonts/campton-medium/Campton-Medium.woff') format('woff'), /* Pretty Modern Browsers */
-        url('assets/fonts/campton-medium/Campton-Medium.ttf') format('truetype'), /* Safari, Android, iOS */
-        url('assets/fonts/campton-medium/Campton-Medium.svg#Campton-Medium') format('svg'); /* Legacy iOS */
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Campton Semibold';
-    src: url('assets/fonts/campton-semibold/Campton-SemiBold.eot'); /* IE9 Compat Modes */
-    src: url('assets/fonts/campton-semibold/Campton-SemiBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-        url('assets/fonts/campton-semibold/Campton-SemiBold.woff2') format('woff2'), /* Super Modern Browsers */
-        url('assets/fonts/campton-semibold/Campton-SemiBold.woff') format('woff'), /* Pretty Modern Browsers */
-        url('assets/fonts/campton-semibold/Campton-SemiBold.ttf') format('truetype'), /* Safari, Android, iOS */
-        url('assets/fonts/campton-semibold/Campton-SemiBold.svg#Campton-SemiBold') format('svg'); /* Legacy iOS */
-    font-weight: 600;
-    font-style: normal;
-}
-
 // GLOBAL VARIABLES
 $black: #000;
-$grey: #A5A4A4;
-$white: #fff;
+$grey: #565656;
+$white: #E7E6E6;
 
 // MIXINS
 @mixin wrapper($max-width: 1280px, $width: 85%, $margin: 0 auto) {

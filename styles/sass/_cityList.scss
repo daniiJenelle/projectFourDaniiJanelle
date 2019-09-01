@@ -1,0 +1,90 @@
+.cityList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  border: 5px solid red;
+  visibility: hidden;
+
+  &.visibilityChange {
+    visibility: visible;
+  }
+}
+
+.cityOptions {
+  width: 85vw;
+  height: 73vh;
+  background: $black;
+  border: 5px solid $white;
+  
+  font-family: "Campton Semibold", sans-serif;
+  font-size: 4.5rem;
+  text-align: center;
+  list-style: none;
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  opacity: 0;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+  padding: 2% 0 100px;
+  // transform: scale(0);
+  // transition: opacity 0.3s, transform 0.5s;
+
+  &.opacityChange {
+    opacity: 1;
+  }
+
+  li {
+    width: 90%;
+    transform: scale(1);
+    transition: all 0.4s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+    
+    a {
+      font-family: "Campton Medium", sans-serif;
+      letter-spacing: 1px;
+      margin: 0 auto;
+      text-transform: lowercase;
+      color: transparent;
+      -webkit-text-stroke: 1.3px $white;
+      transition: all 0.35s;
+
+      &:hover {
+        cursor: pointer;
+        color: $white;
+        -webkit-text-stroke: 0.8px $white;
+      }
+    }
+  }
+
+  i {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 100;
+    font-size: 4.5rem;
+    color: white;
+    cursor: pointer;
+
+    transform: scale(1);
+    transition: all 0.4s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
