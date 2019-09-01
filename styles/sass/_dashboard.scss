@@ -21,6 +21,8 @@
 
 .dashSection {
     border: 2px solid green;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 .cityName {
@@ -46,7 +48,7 @@
 
 // WEATHER SECTION STYLING STARTS HERE
 .weather {
-    height: 40%;
+    height: 30%;
     display: flex;
     div {
         width: calc(100% / 3);
@@ -58,6 +60,6 @@
 }
 
 .cityPhoto {
-    height: 40%;
+    height: 50%;
 }
 

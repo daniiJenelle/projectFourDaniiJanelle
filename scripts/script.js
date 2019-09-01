@@ -27,7 +27,7 @@ app.getCityInfo = function (chosenCity) {
     method: 'GET',
     dataType: 'json',
     data: {
-      apikey: 'Jip3xwxEAw8IjDBc09F3cVCUABRgzrl6',
+      apikey: 'HLfqldOiZiGuEbbAgh9M5aXYeE5TuoAA',
       q: chosenCity
     }
   });
@@ -77,7 +77,26 @@ app.getWeather = function (latitude, longitude) {
       units: 'metric'
     }
   });
-}; // AJAX METHODS END
+}; 
+
+// function for ajax call to get photo for location
+app.getPhoto = function (cityName, countryName) {
+  return $.ajax({
+    url: `https://pixabay.com/api/`,
+    
+    method: `GET`,
+    dataType: `json`,
+    data: {
+      key: `13477328-fc7c4133a7a5d2292102c1037`,
+      q: `${cityName} ${countryName}`,
+      image_type: `photo`,
+      orientation: `horizontal`,
+      min_width: `640px`
+    }
+  })
+}
+
+// AJAX METHODS END
 
 // METHODS START
 
@@ -120,7 +139,8 @@ app.handleMatchedCities = function (matchedCities) {
     app.renderMatchedCitiesList(matchedCities);
     app.chooseCityFromList(matchedCities);
   } else {
-    app.chosenCityName = matchedCities;
+    app.chosenCityName = matchedCities[0].replace(/,.*?,/, '').replace(/\(.*?\)/, '');
+    console.log(app.chosenCityName);
     app.searchHandleCityInfo(app.chosenCityName);
   }
 }
@@ -139,11 +159,21 @@ app.chooseCityFromList = function (matchedCities) {
   $('.cityOptions').on('click', 'li', function () {
     app.chosenCityName = matchedCities.filter((city) => {
       return city === $(this).text();
-    });
+    })
+
+    if (app.chosenCityName[0].includes(`,()`)) {
+      app.chosenCityName = app.chosenCityName[0].replace(/,.*?,/, '');
+      console.log(app.chosenCityName)
+    }
+    
     console.log('User has selected this city', app.chosenCityName)
     app.searchHandleCityInfo(app.chosenCityName);
     $('.cityOptions').off();
   });
+}
+
+app.cleanInput = function (chosenCityName) {
+  
 }
 
 // use chosen city to invoke search to retrieve city information
@@ -158,7 +188,7 @@ app.searchHandleCityInfo = async function (chosenCity) {
   app.longitude = chosenCityInfo[0].GeoPosition.Longitude;
 
   console.log(app.officialCityName, app.latitude, app.longitude);
-  app.dashboardAPICalls(app.officialCityname, app.countryName, app.latitude, app.longitude);
+  app.dashboardAPICalls(app.officialCityName, app.countryName, app.latitude, app.longitude);
 }
 
 // function to render News ajax call to the dashboard
@@ -197,17 +227,27 @@ app.displayTimeDashboard = function (time) {
   $(`.dateTime`).append(`${date}`);
 }
 
+// function to render photo ajax call to the dashboard
+app.displayPhotoDashboard = function (photo) {
+  const photoURL = photo.hits[0].webformatURL
+  const photoAltText = photo.hits[0].tags
+
+  $(`.cityPhoto`).html(`<img src="${photoURL}" alt="${photoAltText}">`)
+}
+
 // function to retrieve news, time and weather objects and render to dashboard
 app.dashboardAPICalls = async function (officialCityName, countryName, latitude, longitude) {
   const news = await app.getNews(officialCityName, countryName);
   // const time = await app.getTimezone(latitude, longitude);
   const weather = await app.getWeather(latitude, longitude);
+  const photo = await app.getPhoto(officialCityName, countryName);
 
-  $(`.cityName h1`).append(`<p>${app.officialCityName}</p><p>${app.countryName}</p>`)
+  $(`.cityName h1`).append(`<p>${officialCityName}</p><p>${countryName}</p>`)
   
   app.displayNewsDashboard(news);
   app.displayWeatherDashboard(weather);
   app.displayTimeDashboard(weather);
+  app.displayPhotoDashboard(photo);
 }
 
 // INIT FUNCTION
