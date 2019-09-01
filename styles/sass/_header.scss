@@ -1,20 +1,40 @@
+body {
+  position: relative;
+  font-family: "Campton Medium", sans-serif;
+}
+
 header {
-  @include wrapper;
   height: 100vh;
-  font-family: "Campton", sans-serif;
+  background: $black;
   text-align: center;
+  transition: background 0.7s;
+
+  // &.changeBackground {
+  //   background: $black;
+  // }
   
   .container {
+    @include wrapper;
     position: relative;
     height: 100%;
     @include flexCenter;
     align-content: center;
-    margin-top: -3%;
   }
 
   h1 {
+    font-family: "Campton Semibold", sans-serif;
+    font-weight: 600;
+    position: absolute;
+    top: 37vh;
     width: 100%;
-    font-size: 5.4rem;
+    font-size: 3.6rem;
+    color: #fff;
+    transition: font-size 0.3s ease-out, top 0.8s ease-out;
+
+    &.shiftUp {
+      top: 5vh;
+      font-size: 2rem;
+    }
   }
 
   form {
@@ -22,38 +42,51 @@ header {
   }
 
   input {
-    width: 55%;
+    width: 80%;
     border: 0;
     margin-top: -10px;
-    padding-bottom: 6px;
-    
+    padding-bottom: 4px;
     background: transparent;
-    border-bottom: 3px solid transparent;
+    border-bottom: 2px solid transparent;
+
+    font-family: "Campton Semibold", sans-serif;
     font-size: 8rem;
-    text-transform: lowercase;
-    color: $black;
-    text-align: center;
     letter-spacing: 1.5px;
-    text-shadow: 1.5px 1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px 0px 0 #fff, 0px 1.5px 0 #fff, -1.5px 0px 0 #fff, 0px -1.5px 0 #fff;
-    transform: scale(1);
-    transition: transform 0.2s;
+    text-align: center;
+    color: transparent;
+    -webkit-text-stroke: 2px $white;
+    
+    text-transform: lowercase;
+    caret-color: $white;
+
+    transition: border-bottom 1s, padding-bottom 1s;
+    
 
     &::placeholder {
       opacity: 0.5;
-      text-shadow: 1.5px 1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px 0px 0 #fff, 0px 1.5px 0 #fff, -1.5px 0px 0 #fff, 0px -1.5px 0 #fff;
     }
 
     &:focus {
-      transform: scale(1.2);
-      transform-origin: top center;
+      border-color: $white;
+      padding-bottom: 12px;
     }
+  }
+  
+  input[type="button"] {
+    width: 1%;
+    font-size: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity: 0;
   }
 
   .searchHint {
+    font-family: "Campton Medium", sans-serif;
     font-size: 2rem;
     color: #fff;
     position: absolute;
-    bottom: 2%;
+    bottom: 5vh;
     left: 0;
     width: 100%;
     opacity: 0;
@@ -61,6 +94,67 @@ header {
 
     &.showEl {
       opacity: 1;
+    }
+
+    &.hideEl {
+      opacity: 0;
+    }
+  }
+}
+
+.cityList {
+  // border: 10px solid green;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: none;
+
+  &.revealPopUp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.cityOptions {
+  list-style: none;
+  font-family: "Campton Semibold", sans-serif;
+  font-size: 4.5rem;
+  background: $black;
+  width: 85%;
+  height: 80vh;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  overflow-y: scroll;
+  // overflow: hidden;
+
+  li {
+    width: 90%;
+    transform: scale(1);
+    transition: all 0.4s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+    
+  }
+  a {
+    font-family: "Campton Medium", sans-serif;
+    margin: 0 auto;
+    text-transform: lowercase;
+    color: transparent;
+    -webkit-text-stroke: 1.3px $white;
+    transition: all 0.35s;
+
+    &:hover {
+      cursor: pointer;
+      color: $white;
+      -webkit-text-stroke: 0.8px $white;
     }
   }
 }
