@@ -215,8 +215,10 @@ app.displayWeatherDashboard = function (weather) {
   const weatherIcon = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
   const tempMin = Math.round(weather.main.temp_min)
   const tempMax = Math.round(weather.main.temp_max)
+  const sunrise = weather.sys.sunrise
+  const sunset = weather.sys.sunset
 
-  $(`.weather`).append(`<div><p>${temperature} °</p></div><div><p>${weatherTitle}</p><p>${weatherDescription}</p><p>${tempMin}</p><p>${tempMax}</p></div><div><img src="${weatherIcon}"></div>`)
+  $(`.weather`).append(`<div><p>${temperature} °</p></div><div><p>${weatherTitle}</p><p>${weatherDescription}</p><p>${tempMin}</p><p>${tempMax}</p><p>Sunrise: ${sunrise}</p><p>Sunset: ${sunset}</div><div><img src="${weatherIcon}"></div>`)
 }
 
 // function to render time ajax call to the dashboard
