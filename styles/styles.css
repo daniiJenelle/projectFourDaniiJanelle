@@ -342,9 +342,6 @@ header .searchHint.showEl {
 
 .dashSection {
   border: 2px solid green;
-  -o-object-fit: cover;
-     object-fit: cover;
-  overflow: hidden;
 }
 
 .cityName {
@@ -352,7 +349,7 @@ header .searchHint.showEl {
 }
 
 .news {
-  overflow: scroll;
+  overflow-y: scroll;
   height: 80%;
   border: 2px solid blue;
   display: -webkit-box;
@@ -389,5 +386,10 @@ header .searchHint.showEl {
 
 .cityPhoto {
   height: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  overflow: hidden;
+  -o-object-position: center;
+     object-position: center;
 }
 /*# sourceMappingURL=styles.css.map */

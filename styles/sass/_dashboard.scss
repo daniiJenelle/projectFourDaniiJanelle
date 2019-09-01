@@ -21,8 +21,7 @@
 
 .dashSection {
     border: 2px solid green;
-    object-fit: cover;
-    overflow: hidden;
+
 }
 
 .cityName {
@@ -31,7 +30,7 @@
 
 // NEWS SECTION STYLING STARTS HERE
 .news {
-    overflow: scroll;
+    overflow-y: scroll;
     height: 80%;
     border: 2px solid blue;
     display: flex;
@@ -61,5 +60,8 @@
 
 .cityPhoto {
     height: 50%;
+    object-fit: cover;
+    overflow: hidden;
+    object-position: center;
 }
 
