@@ -1,4 +1,3 @@
-
 .dashboard {
     background: white;
     color: $black;
@@ -21,7 +20,7 @@
 
 .dashSection {
     border: 2px solid green;
-
+    padding: 5%;
 }
 
 .cityName {
@@ -30,7 +29,7 @@
 
 // NEWS SECTION STYLING STARTS HERE
 .news {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 80%;
     border: 2px solid blue;
     display: flex;
@@ -60,8 +59,8 @@
 
 .cityPhoto {
     height: 50%;
-    object-fit: cover;
-    overflow: hidden;
-    object-position: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 

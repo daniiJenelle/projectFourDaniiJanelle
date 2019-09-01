@@ -1,0 +1,25 @@
+.weather {
+    
+    font-size: 1.6rem;
+    color: rgb(93,93,93);
+    text-align: center;
+    h3 {
+        color: $black;
+    }
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 2vh;
+    }
+    .temperature {
+        font-size: 6.8rem;
+        color: $black
+        
+    }
+    .weatherIcon {
+        object-fit: cover;
+        padding: 20%;
+    }
+}

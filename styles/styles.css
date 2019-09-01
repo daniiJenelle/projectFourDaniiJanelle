@@ -439,6 +439,7 @@ header .searchHint.hideEl {
 
 .dashSection {
   border: 2px solid green;
+  padding: 5%;
 }
 
 .cityName {
@@ -446,7 +447,7 @@ header .searchHint.hideEl {
 }
 
 .news {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 80%;
   border: 2px solid blue;
   display: -webkit-box;
@@ -483,10 +484,46 @@ header .searchHint.hideEl {
 
 .cityPhoto {
   height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.weather {
+  font-size: 1.6rem;
+  color: #5d5d5d;
+  text-align: center;
+}
+
+.weather h3 {
+  color: #000;
+}
+
+.weather div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 2vh;
+}
+
+.weather .temperature {
+  font-size: 6.8rem;
+  color: #000;
+}
+
+.weather .weatherIcon {
   -o-object-fit: cover;
      object-fit: cover;
-  overflow: hidden;
-  -o-object-position: center;
-     object-position: center;
+  padding: 20%;
 }
 /*# sourceMappingURL=styles.css.map */
