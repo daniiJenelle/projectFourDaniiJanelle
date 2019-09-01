@@ -12,10 +12,11 @@ app.getCityNames = function (cityName) {
     dataType: 'jsonp',
     headers: {
       "x-rapidapi-host": "devru-latitude-longitude-find-v1.p.rapidapi.com",
-      "x-rapidapi-key": "9e16543852msh061f067cf4ff492p109400jsn392cd80914f3"
+      "x-rapidapi-key": "9e16543852msh061f067cf4ff492p109400jsn392cd80914f3",
     },
     data: {
-      q: cityName
+      q: cityName,
+      sort: `size`
     }
   })
 };
@@ -48,20 +49,20 @@ app.getNews = function (cityName, countryName) {
 };
 
 // function for ajax call to get timezone information based on latitude and longitutde
-// app.getTimezone = function (latitude, longitude) {
-//   return $.ajax({
-//     url: `http://api.timezonedb.com/v2.1/get-time-zone`,
-//     method: 'GET',
-//     dataType: 'json',
-//     data: {
-//       key: '8EZVCD1H71OJ',
-//       format: 'json',
-//       by: 'position',
-//       lat: latitude,
-//       lng: longitude
-//     }
-//   });
-// };
+app.getTimezone = function (latitude, longitude) {
+  return $.ajax({
+    url: `http://api.timezonedb.com/v2.1/get-time-zone`,
+    method: 'GET',
+    dataType: 'json',
+    data: {
+      key: '8EZVCD1H71OJ',
+      format: 'json',
+      by: 'position',
+      lat: latitude,
+      lng: longitude
+    }
+  });
+};
 
 // function for ajax call to get weather based on latitude and longitude
 app.getWeather = function (latitude, longitude) {
@@ -83,7 +84,6 @@ app.getWeather = function (latitude, longitude) {
 app.getPhoto = function (cityName, countryName) {
   return $.ajax({
     url: `https://pixabay.com/api/`,
-
     method: `GET`,
     dataType: `json`,
     data: {
@@ -91,7 +91,8 @@ app.getPhoto = function (cityName, countryName) {
       q: `${cityName} ${countryName}`,
       image_type: `photo`,
       orientation: `horizontal`,
-      min_width: `640px`
+      min_width: `640`,
+      min_height: `600`
     }
   })
 }
@@ -178,20 +179,9 @@ app.chooseCityFromList = function (matchedCities) {
       return city === $(this).text();
     })[0].replace(/,.*?,/, '')
 
-    // if (app.chosenCityName[0].includes(`,()`)) {
-    //   console.log(app.chosenCityName)
-    //   app.chosenCityName = app.chosenCityName[0].replace(/,.*?,/, '');
-    //   console.log(app.chosenCityName)
-    // }
-
-    console.log('User has selected this city', app.chosenCityName)
     app.searchHandleCityInfo(app.chosenCityName);
     $('.cityOptions').off();
   });
-}
-
-app.cleanInput = function (chosenCityName) {
-
 }
 
 // use chosen city to invoke search to retrieve city information
@@ -201,12 +191,12 @@ app.searchHandleCityInfo = async function (chosenCity) {
   console.log('Info of chosen city has been stored');
   app.officialCityName = chosenCityInfo[0].EnglishName;
   app.countryName = chosenCityInfo[0].Country.EnglishName;
-  // app.countryCode = chosenCityInfo[0].Country.ID;
   app.latitude = chosenCityInfo[0].GeoPosition.Latitude;
   app.longitude = chosenCityInfo[0].GeoPosition.Longitude;
+  app.timezone = chosenCityInfo[0].TimeZone.Code
 
-  console.log(app.officialCityName, app.countryName, app.latitude, app.longitude);
-  app.dashboardAPICalls(app.officialCityName, app.countryName, app.latitude, app.longitude);
+  console.log(app.officialCityName, app.countryName, app.latitude, app.longitude, app.timezone);
+  app.dashboardAPICalls(app.officialCityName, app.countryName, app.latitude, app.longitude, app.timezone);
 }
 
 // function to render News ajax call to the dashboard
@@ -215,62 +205,57 @@ app.displayNewsDashboard = function (news) {
     const articleTitle = article.headline.main
     const articleAbstract = article.abstract
     const articleLink = article.web_url
-    let articleImage = ''
+    const articleDate = new Date(article.pub_date);
+    let articleImage = './styles/assets/images/newsImage.jpg'
     if (article.multimedia[0] != undefined && article.multimedia.length != 1) {
       articleImage = `https://www.nytimes.com/` + `${article.multimedia[0].url}`
     }
 
-    $(`.news`).append(`<a href="${articleLink}" class="singleArticle"><img src="${articleImage}" alt=""><h3>${articleTitle}</h3><p>${articleAbstract}</p></a>`);
+    $(`.news`).append(`<a href="${articleLink}" class="singleArticle"><img src="${articleImage}" alt=""><h3>${articleTitle}</h3><p>${articleDate.toDateString()}</p><p>${articleAbstract}</p></a>`);
   });
 }
 
 // function to render weather ajax call to the dashboard
-app.displayWeatherDashboard = function (weather) {
-  const weatherTitle = weather.weather[0].main
-  const weatherDescription = weather.weather[0].description
+app.displayWeatherDashboard = function (weather, timezone) {
+  const weatherTitle = weather.weather[0].description
   const temperature = Math.round(weather.main.temp)
-  const weatherIcon = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
+  console.log(weather.weather[0].icon)
+  const weatherIcon = `./styles/assets/images/weatherIcons/${weather.weather[0].icon}.svg`
   const tempMin = Math.round(weather.main.temp_min)
   const tempMax = Math.round(weather.main.temp_max)
-  const sunrise = weather.sys.sunrise
-  const sunset = weather.sys.sunset
+  console.log(timezone)
+  const sunrise = new Date(weather.sys.sunrise * 1000)
+  const sunset = new Date (weather.sys.sunset * 1000)
+  console.log(sunrise)
 
-  $(`.weather`).append(`<div><p>${temperature} °</p></div><div><p>${weatherTitle}</p><p>${weatherDescription}</p><p>${tempMin}</p><p>${tempMax}</p><p>Sunrise: ${sunrise}</p><p>Sunset: ${sunset}</div><div><img src="${weatherIcon}"></div>`)
+  $(`.weather`).append(`<div><p class="temperature">${temperature}°C</p><p class="minMax">${tempMax} / ${tempMin}</p></div><div><h3>${weatherTitle}</h3><p>Sunrise: ${sunrise.toLocaleTimeString()}</p><p>Sunset: ${sunset.toLocaleTimeString()}</div><div><img class="weatherIcon" src="${weatherIcon}"></div>`)
 }
 
 // function to render time ajax call to the dashboard
 app.displayTimeDashboard = function (time) {
-  const date = new Date(time.dt * 1000);
-  // Hours part from the timestamp
-  // const hours = date.getHours();
-  // // Minutes part from the timestamp
-  // const minutes = "0" + date.getMinutes();
-  // // Seconds part from the timestamp
-  // const seconds = "0" + date.getSeconds();
-  // console.log(date, hours, minutes, seconds);
-  $(`.dateTime`).append(`${date}`);
+  date = new Date(time.formatted)
+  $(`.dateTime`).append(`<h3>local time: </h3><p>${date}</p>`);
 }
 
 // function to render photo ajax call to the dashboard
 app.displayPhotoDashboard = function (photo) {
   const photoURL = photo.hits[0].webformatURL
-  const photoAltText = photo.hits[0].tags
 
-  $(`.cityPhoto`).html(`<img src="${photoURL}" alt="${photoAltText}">`)
+  $(`.cityPhoto`).css(`background-image`, `url(${photoURL}`)
 }
 
 // function to retrieve news, time and weather objects and render to dashboard
-app.dashboardAPICalls = async function (officialCityName, countryName, latitude, longitude) {
+app.dashboardAPICalls = async function (officialCityName, countryName, latitude, longitude, timezone) {
   const news = await app.getNews(officialCityName, countryName);
-  // const time = await app.getTimezone(latitude, longitude);
+  const time = await app.getTimezone(latitude, longitude);
   const weather = await app.getWeather(latitude, longitude);
   const photo = await app.getPhoto(officialCityName, countryName);
 
   $(`.cityName h1`).append(`<p>${officialCityName}</p><p>${countryName}</p>`)
 
   app.displayNewsDashboard(news);
-  app.displayWeatherDashboard(weather);
-  app.displayTimeDashboard(weather);
+  app.displayWeatherDashboard(weather, timezone);
+  app.displayTimeDashboard(time);
   app.displayPhotoDashboard(photo);
 }
 
