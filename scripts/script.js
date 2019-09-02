@@ -355,7 +355,7 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
     photo = await app.getPhoto('town', countryName);
   }
 
-  $(`.cityName h1`).append(`<p>${officialCityName}</p><p>${countryName}</p>`)
+  $(`.cityName`).append(`<h3>${officialCityName} ${countryName}</h3>`)
 
   app.displayNewsDashboard(news);
   app.displayWeatherDashboard(weather, localOffset);

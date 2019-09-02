@@ -425,7 +425,6 @@ header .searchHint.hideHint {
   width: 95%;
   height: 100vh;
   margin: 0 auto;
-  border: 1px solid purple;
 }
 
 .dashboardWrapper a {
@@ -436,10 +435,9 @@ header .searchHint.hideHint {
 
 .dashboardLeft,
 .dashboardRight {
-  margin: 40px 20px 0;
+  margin: 30px 15px 0;
   width: 50%;
-  height: calc(100% - 40px);
-  border: 2px solid tomato;
+  height: calc(100% - 30px);
 }
 
 .dashboardRight {
@@ -450,19 +448,30 @@ header .searchHint.hideHint {
       flex-wrap: wrap;
 }
 
-.dashSection {
-  border: 2px solid green;
-}
-
 .cityName {
   height: 20%;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  text-transform: lowercase;
+  font-family: "Campton Semibold", sans-serif;
+}
+
+.cityName h2 {
+  font-size: 4.5rem;
+  -webkit-text-stroke: 1px #000;
+  color: transparent;
+}
+
+.cityName h3 {
+  margin-top: -1rem;
+  font-size: 6rem;
+  color: #000;
+  -webkit-text-stroke: none;
 }
 
 .news {
   overflow-y: auto;
-  height: calc(80% - 40px);
-  border: 2px solid blue;
+  height: calc(80% - 30px);
+  background: #c9c9c9;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -482,9 +491,9 @@ header .searchHint.hideHint {
 
 .weather,
 .dateTime {
-  width: calc(50% - 20px);
-  height: calc(50% - 20px);
-  margin-bottom: 40px;
+  width: calc(50% - 15px);
+  height: calc(50% - 15px);
+  margin-bottom: 30px;
   background: #DBDBDB;
 }
 
@@ -492,7 +501,7 @@ header .searchHint.hideHint {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-right: 40px;
+  margin-right: 30px;
 }
 
 .weather div {
@@ -501,7 +510,7 @@ header .searchHint.hideHint {
 
 .cityPhoto {
   width: 100%;
-  height: calc(50% - 20px);
+  height: calc(50% - 15px);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
