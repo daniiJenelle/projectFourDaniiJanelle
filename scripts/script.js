@@ -125,6 +125,7 @@ app.formSubmit = function () {
     e.preventDefault();
     if (app.userInput.length >= 3) {
       app.searchCityAutocomplete(app.userInput);
+      $('#citySearch').blur();
     };
   });
 }
@@ -135,22 +136,23 @@ app.searchCityAutocomplete = async function (cityName) {
     let matchedCities = await app.getCityNames(cityName);
 
     if (matchedCities[0] === '' || matchedCities.length === 0) {
-      console.log('city does not exist');
       $('#searchHint').text('no results found. try again.');
-      return
+      $('#searchHint').addClass('shake');
+      $('#searchHint').one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function (e) {
+        $('#searchHint').removeClass('shake');
+      });
+      return;
     }
 
-    setTimeout(() => {
-      $('#searchHint').text('');
-    }, 1000);
-
-    $('header').addClass('changeBackground');
     $('#searchHint').removeClass('showHint');
+    $('#searchHint').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function (e) {
+      $('#searchHint').text('');
+    });
     app.takeMeToAnimation();
     app.handleMatchedCities(matchedCities);
 
   } catch (error) {
-    alert('⚠️ API is not working... so go home and sleep. 🔥')
+    alert('⚠️ API is not working... so go home and sleep 🔥')
   }
 }
 
@@ -192,7 +194,7 @@ app.renderMatchedCitiesList = function (matchedCities) {
   matchedCities.forEach((city) => {
     const liHTML = `<li><a href="#dashboard">${city}</a></li>`
     // prints each city as a list item on page
-    $('.cityOptions').append(liHTML);
+    $('.cityList').append(liHTML);
   });
 
   app.popUpModalAnimation();
@@ -201,32 +203,50 @@ app.renderMatchedCitiesList = function (matchedCities) {
 // pop up modal that shows list of cities
 app.popUpModalAnimation = function () {
   setTimeout(() => {
-    $('#cityList').addClass('visibilityChange');
-    $('.cityOptions').addClass('zoomIn').addClass('opacityChange');
+    $('#cityPopUp').addClass('visibilityChange');
+    $('.cityList').addClass('zoomIn').addClass('opacityChange');
+    $('#citySearchForm').css('opacity', '0');
 
     // listening for click on X to close the pop up modal
-    $('#closeCross').click(() => {
-      $('.cityOptions').removeClass('zoomIn').addClass('zoomOut').removeClass('opacityChange');
-      $('#cityList').removeClass('visibilityChange');
-      $('.cityOptions').html(`<a href="#" id="closeCross"><i class="far fa-times-circle"></i></a>`);
+    $('#closeX').click(() => {
+      $('.cityList').removeClass('zoomIn').addClass('zoomOut').removeClass('opacityChange');
+      $('#cityPopUp').removeClass('visibilityChange');
+      $('.cityList').empty();
       $('#searchHint').text(`hit enter to search ${app.userInput}`);
       $('#searchHint').addClass('showHint');
       $('h1').removeClass('shiftUp');
       $('h1')[0].innerHTML = 'take me to';
-      $('.cityOptions').removeClass('zoomOut');
+      $('#citySearchForm').delay(1500).css('opacity', '1');
+      $('.cityList').removeClass('zoomOut');
     });
-  }, 2000);
+  }, 1400);
 };
 
 // listen for which matched city the user clicks on
 app.chooseCityFromList = function (matchedCities) {
-  $('.cityOptions').on('click', 'li', function () {
+  $('.cityList').on('click', 'li', function () {
+    $('.cityList li:not(.selectedCity)').addClass('fadeOutCity');
+
+    $('li').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
+      function (e) {
+        $(this).addClass('selectedCity');
+      });
+
+    $('.cityList li:not(.selectedCity)').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
+      function (e) {
+        $('.cityList li:not(.selectedCity)').css('display', 'none');
+      });
+
+    $('.cityList').addClass('fadeBlack');
+    $('h1').text('taking you to');
+    $('h1').removeClass('shiftUp').addClass('transparent');
+
     app.chosenCityName = matchedCities.filter((city) => {
       return city === $(this).text();
     })[0].replace(/,.*?,/, '').replace(/\(.*?\)/, '');
 
     app.searchHandleCityInfo(app.chosenCityName);
-    $('.cityOptions').off();
+    $('.cityList').off();
   });
 }
 
@@ -248,26 +268,26 @@ app.searchHandleCityInfo = async function (chosenCity) {
 }
 
 // smoothscroll function for user making choice from city list
-app.smoothScroll = function() {
+app.smoothScroll = function () {
   $('.cityOptions').on('click', 'li', () => {
     $(`html`).animate({
       scrollTop: $(`#dashboard`).offset().top
-    }, 900, function() {
-        window.location.hash = `#dashboard`;
-        $(`header`).css(`display`, `none`);
+    }, 900, function () {
+      window.location.hash = `#dashboard`;
+      $(`header`).css(`display`, `none`);
     });
   });
 }
 
 // smoothscroll function for when user input only has one result
 app.smoothScrollOneChoice = function () {
-    $(`html`).delay(2300).animate({
-      scrollTop: $(`#dashboard`).offset().top
-    }, 900, function () {
-      window.location.hash = `#dashboard`;
-      
-      $(`header`).css(`display`, `none`);
-    });
+  $(`html`).delay(2300).animate({
+    scrollTop: $(`#dashboard`).offset().top
+  }, 900, function () {
+    window.location.hash = `#dashboard`;
+
+    $(`header`).css(`display`, `none`);
+  });
 
 }
 
@@ -275,8 +295,8 @@ app.smoothScrollOneChoice = function () {
 app.clearHash = function () {
   window.addEventListener('load', () => {
     location.hash = ``;
-    });
-  }
+  });
+}
 
 
 // function to render News ajax call to the dashboard
@@ -313,7 +333,7 @@ app.displayWeatherDashboard = function (weather, localOffset) {
 // function to render time ajax call to the dashboard
 app.displayTimeDashboard = function (time, localOffset) {
   const currentDate = new Date();
-  const timezoneOffset = (currentDate.getTimezoneOffset())/60
+  const timezoneOffset = (currentDate.getTimezoneOffset()) / 60
   const timeDiff = (timezoneOffset + localOffset)
   const displayedTime = new Date(currentDate.setHours(currentDate.getHours() + timeDiff))
   console.log(new Date(displayedTime))
