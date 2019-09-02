@@ -1,0 +1,45 @@
+.news {
+  overflow-y: auto;
+  height: calc(80% - 30px);
+  padding: 20px;
+  background: $darkGrey;
+
+  h4 {
+    font-family: "Campton Semibold", sans-serif;
+    font-size: 1.8rem;
+  }
+  
+  .newsArticleContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .singleArticle {
+    cursor: pointer;
+    width: 50%;
+    border-top: 1px solid black;
+    
+
+    h5 {
+      font-size: 1.4rem;
+      margin: 0.7rem 0;
+    }
+
+    p {
+      font-size: 1.4rem;
+      &.articleDate {
+        color: grey;
+      }
+
+      &.articleAbstract {
+        color: lighten($black, 25%);
+        margin: 0 0 0.5rem;
+      }
+    }
+    
+    img {
+      max-height: 260px;
+      object-fit: cover;
+    }
+  }
+}

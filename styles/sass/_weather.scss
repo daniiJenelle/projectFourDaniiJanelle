@@ -1,3 +1,19 @@
+.weather,
+.dateTime {
+  width: calc(50% - 15px);
+  height: calc(50% - 15px);
+  margin-bottom: 30px;
+  background: $lightGrey;
+}
+
+.weather {
+    display: flex;
+    margin-right: 30px;
+    div {
+        width: calc(100% / 3);
+    }
+}
+
 .weather {
     
     font-size: calc(1.2rem + (16 - 12)*(100vw - 350px)/(1280 - 350));
