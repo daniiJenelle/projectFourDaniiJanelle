@@ -239,7 +239,7 @@ app.chooseCityFromList = function (matchedCities) {
 
     $('.cityList').addClass('fadeBlack');
     $('h1').text('taking you to');
-    $('h1').removeClass('shiftUp').addClass('transparent');
+    $('h1').removeClass('shiftUp');
 
     app.chosenCityName = matchedCities.filter((city) => {
       return city === $(this).text();
