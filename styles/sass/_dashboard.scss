@@ -1,10 +1,16 @@
 .dashboard {
     background: white;
     color: $black;
+    height: 100vh;
 }
 
 .dashboardWrapper {
     display: flex;
+    width: 95%;
+    height: 100vh;
+    margin: 0 auto;
+    border: 1px solid purple;
+
     a {
     text-decoration: none;
     color: $black;
@@ -12,58 +18,68 @@
     }
 }
 
-.dashboardLeft, .dashboardRight {
+.dashboardLeft,
+.dashboardRight {
+    margin: 40px 20px 0;
     width: 50%;
-    height: 100vh;
+    height: calc(100% - 40px);
     border: 2px solid tomato;
+}
+
+.dashboardRight {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .dashSection {
     border: 2px solid green;
-    padding: 5%;
+    
 }
 
 .cityName {
     height: 20%;
+    margin-bottom: 40px;
 }
 
 // NEWS SECTION STYLING STARTS HERE
 .news {
     overflow-y: auto;
-    height: 80%;
+    height: calc(80% - 40px);
     border: 2px solid blue;
     display: flex;
     flex-wrap: wrap;
     .singleArticle {
-        width: 50%;
-        border-top: 1px solid black;
-        
-        img {
-        filter: grayscale(100%);
-        }
+      width: 50%;
+      border-top: 1px solid black;
+      
+      img {
+      filter: grayscale(100%);
+      }
     }
 }
 
 // WEATHER SECTION STYLING STARTS HERE
+
+.weather,
+.dateTime {
+  width: calc(50% - 20px);
+  height: calc(50% - 20px);
+  margin-bottom: 40px;
+  background: $lightGrey;
+}
+
 .weather {
-    height: 30%;
     display: flex;
+    margin-right: 40px;
     div {
         width: calc(100% / 3);
     }
 }
 
-.dateTime {
-    height: 20%;
-}
-
 .cityPhoto {
-    height: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  width: 100%;
+  height: calc(50% - 20px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
-// .dashboardDisplayNone {
-//     display: none;
-// }

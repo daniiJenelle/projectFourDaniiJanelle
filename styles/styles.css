@@ -222,6 +222,10 @@ img {
   display: block;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   position: relative;
   font-family: "Campton Medium", sans-serif;
@@ -411,12 +415,17 @@ header .searchHint.hideHint {
 .dashboard {
   background: white;
   color: #000;
+  height: 100vh;
 }
 
 .dashboardWrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 95%;
+  height: 100vh;
+  margin: 0 auto;
+  border: 1px solid purple;
 }
 
 .dashboardWrapper a {
@@ -425,24 +434,34 @@ header .searchHint.hideHint {
   padding: 10px;
 }
 
-.dashboardLeft, .dashboardRight {
+.dashboardLeft,
+.dashboardRight {
+  margin: 40px 20px 0;
   width: 50%;
-  height: 100vh;
+  height: calc(100% - 40px);
   border: 2px solid tomato;
+}
+
+.dashboardRight {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .dashSection {
   border: 2px solid green;
-  padding: 5%;
 }
 
 .cityName {
   height: 20%;
+  margin-bottom: 40px;
 }
 
 .news {
   overflow-y: auto;
-  height: 80%;
+  height: calc(80% - 40px);
   border: 2px solid blue;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -461,23 +480,28 @@ header .searchHint.hideHint {
           filter: grayscale(100%);
 }
 
+.weather,
+.dateTime {
+  width: calc(50% - 20px);
+  height: calc(50% - 20px);
+  margin-bottom: 40px;
+  background: #DBDBDB;
+}
+
 .weather {
-  height: 30%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-right: 40px;
 }
 
 .weather div {
   width: calc(100% / 3);
 }
 
-.dateTime {
-  height: 20%;
-}
-
 .cityPhoto {
-  height: 50%;
+  width: 100%;
+  height: calc(50% - 20px);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -578,7 +602,8 @@ header .searchHint.hideHint {
   background: transparent;
 }
 
-.cityList li {
+.cityList li,
+.cityList a {
   width: 100%;
   color: transparent;
   font-family: "Campton Semibold", sans-serif;
@@ -593,11 +618,8 @@ header .searchHint.hideHint {
   -webkit-text-stroke: 1.4px #000;
 }
 
-.cityList li.fadeOutCity {
-  opacity: 0;
-}
-
-.cityList li.selectedCity {
+.cityList li.selectedCity,
+.cityList a.selectedCity {
   color: #E7E6E6;
   -webkit-transform: scale(1.08);
           transform: scale(1.08);
@@ -608,14 +630,21 @@ header .searchHint.hideHint {
   font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1280 - 320));
 }
 
-.cityList li.selectedCity:hover {
+.cityList li.selectedCity:hover,
+.cityList a.selectedCity:hover {
   color: #E7E6E6;
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
   cursor: default;
 }
 
-.cityList li:hover {
+.cityList li.fadeOutCity,
+.cityList a.fadeOutCity {
+  opacity: 0;
+}
+
+.cityList li:hover,
+.cityList a:hover {
   cursor: pointer;
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
