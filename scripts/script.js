@@ -260,7 +260,7 @@ app.searchHandleCityInfo = async function (chosenCity) {
   app.latitude = chosenCityInfo[0].GeoPosition.Latitude;
   app.longitude = chosenCityInfo[0].GeoPosition.Longitude;
   app.localOffset = chosenCityInfo[0].TimeZone.GmtOffset;
-  app.timezone = chosenCityInfo[0].TimeZone.Code;
+  app.timezone = chosenCityInfo[0].TimeZone.Name;
   console.log(app.timezone)
 
   console.log(app.officialCityName, app.countryName, app.latitude, app.longitude, app.localOffset);
@@ -269,7 +269,7 @@ app.searchHandleCityInfo = async function (chosenCity) {
 
 // smoothscroll function for user making choice from city list
 app.smoothScroll = function () {
-  $('.cityOptions').on('click', 'li', () => {
+  $('.cityList').on('click', 'li', () => {
     $(`html`).animate({
       scrollTop: $(`#dashboard`).offset().top
     }, 900, function () {
@@ -333,9 +333,12 @@ app.displayTimeDashboard = function (time, localOffset) {
   const timezoneOffset = (currentDate.getTimezoneOffset()) / 60
   const timeDiff = (timezoneOffset + localOffset)
   const displayedTime = new Date(currentDate.setHours(currentDate.getHours() + timeDiff))
-  console.log(new Date(displayedTime))
+  let offsetSign = ``
+  if (timeDiff > 0) {
+    offsetSign = `+`
+  }
 
-  $(`.dateTime`).append(`<h3>local time: </h3><p>${displayedTime.toDateString()}, ${displayedTime.toLocaleTimeString()}${app.timezone} (GMT+${timezoneOffset})</p>`);
+  $(`.dateTime`).append(`<h3>local time: </h3><p class="date">${displayedTime.toDateString()}</p><p class="time">${displayedTime.toLocaleTimeString()}</p><p class="timezone">GMT ${offsetSign}${localOffset}</p><p>(${app.timezone})</p>`);
 }
 
 // function to render photo ajax call to the dashboard
@@ -355,7 +358,8 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
     photo = await app.getPhoto('town', countryName);
   }
 
-  $(`.cityName h1`).append(`<p>${officialCityName}</p><p>${countryName}</p>`)
+  $(`.cityName`).append(`<h3>${officialCityName} ${countryName}</h3>`)
+
 
   app.displayNewsDashboard(news);
   app.displayWeatherDashboard(weather, localOffset);
