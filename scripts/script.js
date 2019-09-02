@@ -247,27 +247,36 @@ app.searchHandleCityInfo = async function (chosenCity) {
   app.dashboardAPICalls(app.officialCityName, app.countryName, app.latitude, app.longitude, app.localOffset);
 }
 
-// smoothscroll function
+// smoothscroll function for user making choice from city list
 app.smoothScroll = function() {
   $('.cityOptions').on('click', 'li', () => {
     $(`html`).animate({
       scrollTop: $(`#dashboard`).offset().top
     }, 900, function() {
         window.location.hash = `#dashboard`;
-        
+        $(`header`).css(`display`, `none`);
     });
   });
 }
 
+// smoothscroll function for when user input only has one result
 app.smoothScrollOneChoice = function () {
     $(`html`).delay(2300).animate({
       scrollTop: $(`#dashboard`).offset().top
     }, 900, function () {
       window.location.hash = `#dashboard`;
+      
       $(`header`).css(`display`, `none`);
     });
 
 }
+
+// function to clear hash on refresh
+app.clearHash = function () {
+  window.addEventListener('load', () => {
+    location.hash = ``;
+    });
+  }
 
 
 // function to render News ajax call to the dashboard
@@ -341,6 +350,7 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
 app.init = function () {
   app.checkUserInput();
   app.smoothScroll();
+  app.clearHash();
 };
 
 // DOCUMENT READY
