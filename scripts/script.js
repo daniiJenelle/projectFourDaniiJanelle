@@ -239,7 +239,7 @@ app.chooseCityFromList = function (matchedCities) {
 
     $('.cityList').addClass('fadeBlack');
     $('h1').text('taking you to');
-    $('h1').removeClass('shiftUp');
+    $('h1').removeClass('shiftUp').addClass('transparent');
 
     app.chosenCityName = matchedCities.filter((city) => {
       return city === $(this).text();
@@ -359,6 +359,7 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
   }
 
   $(`.cityName`).append(`<h3>${officialCityName} ${countryName}</h3>`)
+
 
   app.displayNewsDashboard(news);
   app.displayWeatherDashboard(weather, localOffset);
