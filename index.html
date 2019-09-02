@@ -16,20 +16,21 @@
   <header class="search">
     <!-- <nav class="headerNav">logo</nav> -->
     <div class="wrapper">
-      <h1>take me to</h1>
+      <h1 class="animated fadeInDown">take me to</h1>
       <form id="citySearchForm">
         <label for="citySearch" class="visuallyHidden">type a city name</label>
-        <input type="text" placeholder="type city name" id="citySearch" autocomplete="off">
+        <input type="text" placeholder="type city name..." id="citySearch" autocomplete="off" class="animated fadeIn">
         <input type="button" id="submitButton" value="Search your city" class="visuallyHidden">
       </form>
-      <span id="searchHint" class="searchHint">Hit enter to go</span>
+      <span id="searchHint" class="searchHint animated">Hit enter to go</span>
     </div>
   </header>
 
-  <section class="cityList" id="cityList">
-    <ul class="cityOptions animated" id="cityOptions">
-      <a href="#" id="closeCross"><i class="far fa-times-circle"></i></a>
-    </ul>
+  <section class="cityPopUp" id="cityPopUp">
+    <div class="cityListContainer">
+      <a href="#" class="closeX" id="closeX"><i class="far fa-times-circle"></i></a>
+      <ul class="cityList animated" id="cityList"></ul>
+    </div>
   </section>
 
   <main class="dashboard" id="dashboard">

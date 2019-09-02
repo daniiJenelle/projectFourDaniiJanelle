@@ -10,10 +10,6 @@ header {
   background: $black;
   text-align: center;
   transition: background 0.7s;
-
-  &.changeBackground {
-    background: $black;
-  }
   
   .wrapper {
     @include wrapper;
@@ -23,7 +19,7 @@ header {
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    border: 1px solid red;
+    // border: 1px solid red;
 
     @media (max-width: 480px) {
       width: 90%;
@@ -32,15 +28,17 @@ header {
 
   h1 {
     font-family: "Campton Medium", sans-serif;
-    font-size: 4.8em;
+    font-size: 4.5em;
     letter-spacing: 1px;
     color: $white;
     width: 100%;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    animation-duration: 0.5s;
 
     position: relative;
     top: 0;
-    transition: font-size 0.3s ease-out, top 1s ease-out;
+    transition: font-size 0.3s ease-out,
+                top 0.6s 0.3s ease-out;
 
     @media (max-width: 1280px) {
       font-size: calc(3.2rem + (48 - 32) * (100vw - 320px) / (1280 - 320));
@@ -49,8 +47,14 @@ header {
     &.shiftUp {
       position: relative;
       top: -35%;
-      font-family: "Campton Medium", sans-serif;
       font-size: 2.8rem;
+      font-family: "Campton Medium", sans-serif;
+    }
+
+    &.transparent {
+      -webkit-text-stroke: 1px $white;
+      color: transparent;
+      font-family: "Campton Bold", sans-serif;
     }
   }
 
@@ -74,6 +78,7 @@ header {
     text-transform: lowercase;
     caret-color: $white;
     transition: border-bottom 0.3s, padding-bottom 0.3s;
+    animation-delay: 0.5s;
 
     @media (max-width: 1280px) {
       font-size: calc(3.2rem + (100 - 32) * (100vw - 320px) / (1280 - 320));

@@ -1,4 +1,4 @@
-.cityList {
+.cityPopUp {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,7 +7,7 @@
   height: 100vh;
   top: 0;
   left: 0;
-  border: 5px solid red;
+  // border: 5px solid red;
   visibility: hidden;
 
   &.visibilityChange {
@@ -15,10 +15,36 @@
   }
 }
 
-.cityOptions {
-  width: 85vw;
-  height: 73vh;
-  background: $black;
+.cityListContainer {
+  width: 80%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.closeX {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 100;
+    font-size: 4.5rem;
+    color: $black;
+    cursor: pointer;
+
+    transform: scale(1);
+    transition: all 0.4s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+.cityList {
+  width: 100%;
+  max-height: 75vh;
+  background: $white;
+  padding: 2% 0 3%;
   border: 5px solid $white;
   
   font-family: "Campton Semibold", sans-serif;
@@ -37,54 +63,52 @@
   opacity: 0;
   animation-duration: 0.6s;
   animation-fill-mode: forwards;
-  padding: 2% 0 100px;
-  // transform: scale(0);
-  // transition: opacity 0.3s, transform 0.5s;
+  transition: opacity 0.5s;
 
   &.opacityChange {
     opacity: 1;
+    &.fadeBlack {
+      border-width: 0;
+      background: transparent;
+    }
   }
 
   li {
-    width: 90%;
+    width: 100%;
+    color: transparent;
+    font-family: "Campton Semibold", sans-serif;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    text-transform: lowercase;
     transform: scale(1);
-    transition: all 0.4s;
-
-    &:hover {
-      transform: scale(1.05);
-    }
+    transition: opacity 0.3s;
+    opacity: 1;
+    -webkit-text-stroke: 1.4px $black;
     
-    a {
-      font-family: "Campton Medium", sans-serif;
-      letter-spacing: 1px;
-      margin: 0 auto;
-      text-transform: lowercase;
-      color: transparent;
-      -webkit-text-stroke: 1.3px $white;
-      transition: all 0.35s;
+    &.fadeOutCity {
+      opacity: 0;
+    }
 
+    &.selectedCity {
+      color: $white;
+      transform: scale(1.08); 
+      transition: all 0.8s;
+      opacity: 1;
+      cursor: default;
+      font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1280 - 320));
+  
       &:hover {
-        cursor: pointer;
         color: $white;
-        -webkit-text-stroke: 0.8px $white;
+        transform: scale(1.2);
+        cursor: default;
       }
     }
-  }
-
-  i {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    z-index: 100;
-    font-size: 4.5rem;
-    color: white;
-    cursor: pointer;
-
-    transform: scale(1);
-    transition: all 0.4s;
+    
 
     &:hover {
-      transform: scale(1.2);
+      cursor: pointer;
+      transform: scale(1.05);
+      color: $black;
     }
   }
 }
