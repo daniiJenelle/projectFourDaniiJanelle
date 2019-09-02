@@ -274,7 +274,6 @@ app.smoothScroll = function () {
       scrollTop: $(`#dashboard`).offset().top
     }, 900, function () {
       window.location.hash = `#dashboard`;
-      $(`header`).css(`display`, `none`);
     });
   });
 }
@@ -285,8 +284,6 @@ app.smoothScrollOneChoice = function () {
     scrollTop: $(`#dashboard`).offset().top
   }, 900, function () {
     window.location.hash = `#dashboard`;
-
-    $(`header`).css(`display`, `none`);
   });
 
 }
@@ -311,7 +308,7 @@ app.displayNewsDashboard = function (news) {
       articleImage = `https://www.nytimes.com/` + `${article.multimedia[0].url}`
     }
 
-    $(`.news`).append(`<a href="${articleLink}" class="singleArticle"><img src="${articleImage}" alt=""><h3>${articleTitle}</h3><p>${articleDate.toDateString()}</p><p>${articleAbstract}</p></a>`);
+    $(`.news`).append(`<a href="${articleLink}" title="click to read more" class="singleArticle"><img src="${articleImage}" alt=""><h3>${articleTitle}</h3><p>${articleDate.toDateString()}</p><p>${articleAbstract}</p></a>`);
   });
 }
 

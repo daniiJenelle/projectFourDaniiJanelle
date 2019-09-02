@@ -1,15 +1,20 @@
 // GLOBAL VARIABLES
 $black: #000;
-$grey: #565656;
+$lightGrey: #DBDBDB;
+$darkGrey: #c9c9c9;
 $white: #E7E6E6;
-$teal: #A7D6CB;
+$teal: #BAD8CA;
+
+// FONTS
+$med: "Campton Medium", sans-serif;
+$semibold: "Campton Semibold", sans-serif;
+$bold: "Campton Bold", sans-serif;
 
 // MIXINS
 @mixin wrapper($max-width: 1280px, $width: 85%, $margin: 0 auto) {
   max-width: $max-width;
   width: $width;
   margin: $margin;
-  // border: 1px solid red;
 }
 
 @mixin flexCenter($wrap: wrap, $justify-content: center, $align-items: center) {
@@ -27,7 +32,21 @@ $teal: #A7D6CB;
   right: 0;
 }
 
+h1,
+h2,
+h3, 
+div,
+ul,
+p {
+  margin: 0; 
+  padding: 0;
+}
+
 img {
   width: 100%;
   display: block;
+}
+
+a {
+  text-decoration: none;
 }

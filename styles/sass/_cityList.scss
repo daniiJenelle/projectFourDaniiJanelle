@@ -72,7 +72,8 @@
     }
   }
 
-  li {
+  li, 
+  a {
     width: 100%;
     color: transparent;
     font-family: "Campton Semibold", sans-serif;
@@ -84,10 +85,6 @@
     opacity: 1;
     -webkit-text-stroke: 1.4px $black;
     
-    &.fadeOutCity {
-      opacity: 0;
-    }
-
     &.selectedCity {
       color: $white;
       transform: scale(1.08); 
@@ -102,8 +99,11 @@
         cursor: default;
       }
     }
-    
 
+    &.fadeOutCity {
+      opacity: 0;
+    }
+    
     &:hover {
       cursor: pointer;
       transform: scale(1.05);
