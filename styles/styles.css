@@ -210,6 +210,8 @@ html {
 h1,
 h2,
 h3,
+h4,
+h5,
 div,
 ul,
 p {
@@ -430,7 +432,7 @@ header .searchHint.hideHint {
 .dashboardWrapper a {
   text-decoration: none;
   color: #000;
-  padding: 10px;
+  padding: 12px;
 }
 
 .dashboardLeft,
@@ -446,6 +448,14 @@ header .searchHint.hideHint {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+.cityPhoto {
+  width: 100%;
+  height: calc(50% - 15px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .cityName {
@@ -466,12 +476,50 @@ header .searchHint.hideHint {
   font-size: 6rem;
   color: #000;
   -webkit-text-stroke: none;
+  position: relative;
+  z-index: 10;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+@media (max-width: 1080px) {
+  .cityName h3 {
+    font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1080 - 320));
+  }
+}
+
+.cityName h3::after {
+  content: '';
+  display: block;
+  width: 50rem;
+  height: 30px;
+  background: #BAD8CA;
+  position: absolute;
+  z-index: 0;
+  mix-blend-mode: multiply;
+  top: 3.6rem;
+  left: -1rem;
+}
+
+@media (max-width: 1080px) {
+  .cityName h3::after {
+    width: calc(20rem + (500 - 200) * (100vw - 320px) / (1080 - 320));
+  }
 }
 
 .news {
   overflow-y: auto;
   height: calc(80% - 30px);
+  padding: 20px;
   background: #c9c9c9;
+}
+
+.news h4 {
+  font-family: "Campton Semibold", sans-serif;
+  font-size: 1.8rem;
+}
+
+.news .newsArticleContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -480,40 +528,33 @@ header .searchHint.hideHint {
 }
 
 .news .singleArticle {
+  cursor: pointer;
   width: 50%;
   border-top: 1px solid black;
 }
 
+.news .singleArticle h5 {
+  font-size: 1.4rem;
+  margin: 0.7rem 0;
+}
+
+.news .singleArticle p {
+  font-size: 1.4rem;
+}
+
+.news .singleArticle p.articleDate {
+  color: grey;
+}
+
+.news .singleArticle p.articleAbstract {
+  color: #404040;
+  margin: 0 0 0.5rem;
+}
+
 .news .singleArticle img {
-  -webkit-filter: grayscale(100%);
-          filter: grayscale(100%);
-}
-
-.weather,
-.dateTime {
-  width: calc(50% - 15px);
-  height: calc(50% - 15px);
-  margin-bottom: 30px;
-  background: #DBDBDB;
-}
-
-.weather {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin-right: 30px;
-}
-
-.weather div {
-  width: calc(100% / 3);
-}
-
-.cityPhoto {
-  width: 100%;
-  height: calc(50% - 15px);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  max-height: 260px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .cityPopUp {
@@ -667,6 +708,25 @@ header .searchHint.hideHint {
 
 .dateTime p {
   font-size: calc(1.6rem + (20 - 16)*(100vw - 350px)/(1280 - 350));
+}
+
+.weather,
+.dateTime {
+  width: calc(50% - 15px);
+  height: calc(50% - 15px);
+  margin-bottom: 30px;
+  background: #DBDBDB;
+}
+
+.weather {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 30px;
+}
+
+.weather div {
+  width: calc(100% / 3);
 }
 
 .weather {

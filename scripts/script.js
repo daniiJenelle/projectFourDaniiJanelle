@@ -298,6 +298,8 @@ app.clearHash = function () {
 
 // function to render News ajax call to the dashboard
 app.displayNewsDashboard = function (news) {
+  $(`.news`).append(`<h4>local headlines</h4> <div class="newsArticleContainer"></div>`);
+
   news.response.docs.forEach(function (article) {
     const articleTitle = article.headline.main
     const articleAbstract = article.abstract
@@ -308,7 +310,7 @@ app.displayNewsDashboard = function (news) {
       articleImage = `https://www.nytimes.com/` + `${article.multimedia[0].url}`
     }
 
-    $(`.news`).append(`<a href="${articleLink}" title="click to read more" class="singleArticle"><img src="${articleImage}" alt=""><h3>${articleTitle}</h3><p>${articleDate.toDateString()}</p><p>${articleAbstract}</p></a>`);
+    $(`.newsArticleContainer`).append(`<a href="${articleLink}" title="click to read more" class="singleArticle"><img src="${articleImage}" alt=""><h5>${articleTitle}</h5><p class="articleDate">${articleDate.toDateString()}</p><p class="articleAbstract">${articleAbstract}</p></a>`);
   });
 }
 
