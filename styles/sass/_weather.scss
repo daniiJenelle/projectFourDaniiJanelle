@@ -1,6 +1,6 @@
 .weather {
     
-    font-size: 1.6rem;
+    font-size: calc(1.2rem + (16 - 12)*(100vw - 350px)/(1280 - 350));
     color: rgb(93,93,93);
     text-align: center;
     h3 {
@@ -14,7 +14,8 @@
         padding: 2vh;
     }
     .temperature {
-        font-size: 6.8rem;
+        // font-size: 6.8rem;
+        font-size: calc(4rem + (68 - 40)*(100vw - 350px)/(1280 - 350));
         color: $black
         
     }

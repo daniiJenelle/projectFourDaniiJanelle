@@ -88,7 +88,7 @@ app.getPhoto = function (cityName, countryName) {
     dataType: `json`,
     data: {
       key: `13477328-fc7c4133a7a5d2292102c1037`,
-      q: `${cityName} ${countryName}`,
+      q: `${cityName} ${countryName} city`,
       image_type: `photo`,
       orientation: `horizontal`,
       min_width: `640`,
@@ -174,12 +174,13 @@ app.takeMeToAnimation = function () {
 
 // checks data from returned city names
 app.handleMatchedCities = function (matchedCities) {
+  console.log(matchedCities)
   if (matchedCities.length > 1) {
     // render all cities that matches user input to the DOM
     app.renderMatchedCitiesList(matchedCities);
     app.chooseCityFromList(matchedCities);
   } else {
-    app.chosenCityName = matchedCities[0].replace(/,.*?,/, '').replace(/\(.*?\)/, '');
+    app.chosenCityName = matchedCities[0].replace(/,.*?,/, '').replace(/\(.*?\)/, '').replace(/Korea, South/, '')
     console.log(app.chosenCityName);
     app.searchHandleCityInfo(app.chosenCityName);
   }
@@ -188,7 +189,7 @@ app.handleMatchedCities = function (matchedCities) {
 // if more than 1 matched city, print list of cities on page that match user input
 app.renderMatchedCitiesList = function (matchedCities) {
   matchedCities.forEach((city) => {
-    const liHTML = `<li><a>${city}</a></li>`
+    const liHTML = `<li><a href="#dashboard">${city}</a></li>`
     // prints each city as a list item on page
     $('.cityOptions').append(liHTML);
   });
@@ -221,7 +222,7 @@ app.chooseCityFromList = function (matchedCities) {
   $('.cityOptions').on('click', 'li', function () {
     app.chosenCityName = matchedCities.filter((city) => {
       return city === $(this).text();
-    })[0].replace(/,.*?,/, '')
+    })[0].replace(/,.*?,/, '').replace(/\(.*?\)/, '');
 
     app.searchHandleCityInfo(app.chosenCityName);
     $('.cityOptions').off();
@@ -237,11 +238,35 @@ app.searchHandleCityInfo = async function (chosenCity) {
   app.countryName = chosenCityInfo[0].Country.EnglishName;
   app.latitude = chosenCityInfo[0].GeoPosition.Latitude;
   app.longitude = chosenCityInfo[0].GeoPosition.Longitude;
-  app.timezone = chosenCityInfo[0].TimeZone.Code
+  app.localOffset = chosenCityInfo[0].TimeZone.GmtOffset;
+  app.timezone = chosenCityInfo[0].TimeZone.Code;
+  console.log(app.timezone)
 
-  console.log(app.officialCityName, app.countryName, app.latitude, app.longitude, app.timezone);
-  app.dashboardAPICalls(app.officialCityName, app.countryName, app.latitude, app.longitude, app.timezone);
+  console.log(app.officialCityName, app.countryName, app.latitude, app.longitude, app.localOffset);
+  app.dashboardAPICalls(app.officialCityName, app.countryName, app.latitude, app.longitude, app.localOffset);
 }
+
+// smoothscroll function
+app.smoothScroll = function() {
+  $('.cityOptions').on('click', 'li', () => {
+    $(`html`).animate({
+      scrollTop: $(`#dashboard`).offset().top
+    }, 800, function() {
+        window.location.hash = `#dashboard`;
+    });
+  });
+}
+
+app.smoothScrollOneChoice = function () {
+  $('form').submit( () => {
+    $(`html`).animate({
+      scrollTop: $(`#dashboard`).offset().top
+    }, 800, function () {
+      window.location.hash = `#dashboard`;
+    });
+  })
+}
+
 
 // function to render News ajax call to the dashboard
 app.displayNewsDashboard = function (news) {
@@ -260,14 +285,13 @@ app.displayNewsDashboard = function (news) {
 }
 
 // function to render weather ajax call to the dashboard
-app.displayWeatherDashboard = function (weather, timezone) {
+app.displayWeatherDashboard = function (weather, localOffset) {
   const weatherTitle = weather.weather[0].description
   const temperature = Math.round(weather.main.temp)
   console.log(weather.weather[0].icon)
   const weatherIcon = `./styles/assets/images/weatherIcons/${weather.weather[0].icon}.svg`
   const tempMin = Math.round(weather.main.temp_min)
   const tempMax = Math.round(weather.main.temp_max)
-  console.log(timezone)
   const sunrise = new Date(weather.sys.sunrise * 1000)
   const sunset = new Date(weather.sys.sunset * 1000)
   console.log(sunrise)
@@ -276,36 +300,46 @@ app.displayWeatherDashboard = function (weather, timezone) {
 }
 
 // function to render time ajax call to the dashboard
-app.displayTimeDashboard = function (time) {
-  date = new Date(time.formatted)
-  $(`.dateTime`).append(`<h3>local time: </h3><p>${date}</p>`);
+app.displayTimeDashboard = function (time, localOffset) {
+  const currentDate = new Date();
+  const timezoneOffset = (currentDate.getTimezoneOffset())/60
+  const timeDiff = (timezoneOffset + localOffset)
+  const displayedTime = new Date(currentDate.setHours(currentDate.getHours() + timeDiff))
+  console.log(new Date(displayedTime))
+
+  $(`.dateTime`).append(`<h3>local time: </h3><p>${displayedTime.toDateString()}, ${displayedTime.toLocaleTimeString()}${app.timezone} (GMT+${timezoneOffset})</p>`);
 }
 
 // function to render photo ajax call to the dashboard
 app.displayPhotoDashboard = function (photo) {
-  const photoURL = photo.hits[1].webformatURL
+  const photoURL = photo.hits[0].largeImageURL
 
   $(`.cityPhoto`).css(`background-image`, `url(${photoURL}`)
 }
 
 // function to retrieve news, time and weather objects and render to dashboard
-app.dashboardAPICalls = async function (officialCityName, countryName, latitude, longitude, timezone) {
+app.dashboardAPICalls = async function (officialCityName, countryName, latitude, longitude, localOffset) {
   const news = await app.getNews(officialCityName, countryName);
   const time = await app.getTimezone(latitude, longitude);
   const weather = await app.getWeather(latitude, longitude);
-  const photo = await app.getPhoto(officialCityName, countryName);
+  let photo = await app.getPhoto(officialCityName, countryName);
+  if (photo.hits == 0) {
+    photo = await app.getPhoto('town', countryName);
+  }
 
   $(`.cityName h1`).append(`<p>${officialCityName}</p><p>${countryName}</p>`)
 
   app.displayNewsDashboard(news);
-  app.displayWeatherDashboard(weather, timezone);
-  app.displayTimeDashboard(time);
+  app.displayWeatherDashboard(weather, localOffset);
+  app.displayTimeDashboard(time, localOffset);
   app.displayPhotoDashboard(photo);
 }
 
 // INIT FUNCTION
 app.init = function () {
   app.checkUserInput();
+  app.smoothScroll();
+  app.smoothScrollOneChoice();
 };
 
 // DOCUMENT READY

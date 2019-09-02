@@ -403,6 +403,81 @@ header .searchHint.hideHint {
   opacity: 0;
 }
 
+.dashboard {
+  background: white;
+  color: #000;
+}
+
+.dashboardWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dashboardWrapper a {
+  text-decoration: none;
+  color: #000;
+  padding: 10px;
+}
+
+.dashboardLeft, .dashboardRight {
+  width: 50%;
+  height: 100vh;
+  border: 2px solid tomato;
+}
+
+.dashSection {
+  border: 2px solid green;
+  padding: 5%;
+}
+
+.cityName {
+  height: 20%;
+}
+
+.news {
+  overflow-y: auto;
+  height: 80%;
+  border: 2px solid blue;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.news .singleArticle {
+  width: 50%;
+  border-top: 1px solid black;
+}
+
+.news .singleArticle img {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+}
+
+.weather {
+  height: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.weather div {
+  width: calc(100% / 3);
+}
+
+.dateTime {
+  height: 20%;
+}
+
+.cityPhoto {
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .cityList {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -508,83 +583,16 @@ header .searchHint.hideHint {
           transform: scale(1.2);
 }
 
-.dashboard {
-  background: white;
-  color: #000;
-}
-
-.dashboardWrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.dashboardWrapper a {
-  text-decoration: none;
-  color: #000;
-  padding: 10px;
-}
-
-.dashboardLeft, .dashboardRight {
-  width: 50%;
-  height: 100vh;
-  border: 2px solid tomato;
-}
-
-.dashSection {
-  border: 2px solid green;
-  padding: 5%;
-}
-
-.cityName {
-  height: 20%;
-}
-
-.news {
-  overflow-y: auto;
-  height: 80%;
-  border: 2px solid blue;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-
-.news .singleArticle {
-  width: 50%;
-  border-top: 1px solid black;
-}
-
-.news .singleArticle img {
-  -webkit-filter: grayscale(100%);
-          filter: grayscale(100%);
-}
-
-.weather {
-  height: 30%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.weather div {
-  width: calc(100% / 3);
-}
-
 .dateTime {
-  height: 20%;
+  text-align: center;
 }
 
-.cityPhoto {
-  height: 50%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.dateTime p {
+  font-size: calc(1.6rem + (20 - 16)*(100vw - 350px)/(1280 - 350));
 }
 
 .weather {
-  font-size: 1.6rem;
+  font-size: calc(1.2rem + (16 - 12)*(100vw - 350px)/(1280 - 350));
   color: #5d5d5d;
   text-align: center;
 }
@@ -611,7 +619,7 @@ header .searchHint.hideHint {
 }
 
 .weather .temperature {
-  font-size: 6.8rem;
+  font-size: calc(4rem + (68 - 40)*(100vw - 350px)/(1280 - 350));
   color: #000;
 }
 
