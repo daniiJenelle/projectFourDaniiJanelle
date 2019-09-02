@@ -183,6 +183,7 @@ app.handleMatchedCities = function (matchedCities) {
     app.chosenCityName = matchedCities[0].replace(/,.*?,/, '').replace(/\(.*?\)/, '').replace(/Korea, South/, '')
     console.log(app.chosenCityName);
     app.searchHandleCityInfo(app.chosenCityName);
+    app.smoothScrollOneChoice();
   }
 }
 
@@ -251,20 +252,21 @@ app.smoothScroll = function() {
   $('.cityOptions').on('click', 'li', () => {
     $(`html`).animate({
       scrollTop: $(`#dashboard`).offset().top
-    }, 800, function() {
+    }, 900, function() {
         window.location.hash = `#dashboard`;
+        
     });
   });
 }
 
 app.smoothScrollOneChoice = function () {
-  $('form').submit( () => {
-    $(`html`).animate({
+    $(`html`).delay(2300).animate({
       scrollTop: $(`#dashboard`).offset().top
-    }, 800, function () {
+    }, 900, function () {
       window.location.hash = `#dashboard`;
+      $(`header`).css(`display`, `none`);
     });
-  })
+
 }
 
 
@@ -339,7 +341,6 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
 app.init = function () {
   app.checkUserInput();
   app.smoothScroll();
-  app.smoothScrollOneChoice();
 };
 
 // DOCUMENT READY
