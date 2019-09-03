@@ -8,16 +8,19 @@
     font-size: 4.5rem;
     -webkit-text-stroke: 1px $black;
     color: transparent;
-    
+
+    @media (max-width: 1080px) {
+      font-size: calc(3.2rem + (45 - 32) * (100vw - 320px) / (1080 - 320));
+    } 
   }
 
   h3 {
+    display: inline-block;
     margin-top: -1rem;
     font-size: 6rem;
     color: $black;
     -webkit-text-stroke: none;
-    position: relative;
-    z-index: 10;
+    
     line-height: 1;
     margin-top: 1px;
 
@@ -25,21 +28,24 @@
       font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1080 - 320));
     }
 
-    &::after {
+    span {
+      position: relative;
+      z-index: 10;
+      margin-right: 10px;
+      display: inline-block;
+
+      &::after {
       content: '';
       display: block;
-      width: 50rem;
-      height: 30px;
+      width: 110%;
+      height: 48%;
       background: #BAD8CA;
       position: absolute;
       z-index: 0;
       mix-blend-mode: multiply;
-      top: 3.6rem;
-      left: -1rem;
-
-      @media (max-width: 1080px) {
-        width: calc(20rem + (500 - 200) * (100vw - 320px) / (1080 - 320));
-      }
+      top: 62%;
+      left: -3%;
+    }
     }
   }
 }

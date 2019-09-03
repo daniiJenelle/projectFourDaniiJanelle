@@ -21,6 +21,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 }
 
 .closeX {
@@ -29,14 +33,35 @@
     left: 18px;
     z-index: 100;
     font-size: 4.5rem;
-    color: $black;
     cursor: pointer;
+    color: $black;
+    transform-origin: center center;
+    transform: scale(0);
+    transition: transform 0.3s;
 
-    transform: scale(1);
-    transition: all 0.4s;
+    
+    &.zoomIn {
+      transform: scale(1);
+      
+      @media (max-width: 600px) {
+        transform: scale(1) translate(-50%);
+        color: $white;
+        top: auto;
+        bottom: -70px;
+        left: 50%;
+      }
 
-    &:hover {
-      transform: scale(1.2);
+      @media (max-width: 320px) {
+        bottom: -63px;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+
+        @media (max-width: 600px) {
+          transform: scale(1.2) translate(-50%);
+        }
+      }
     }
   }
 
@@ -72,39 +97,48 @@
       background: transparent;
     }
   }
-
-  li, 
-  a {
+  
+  li {
+    font-size: 6rem;
     width: 100%;
+    opacity: 1;
+    transition: opacity 0.3s;
+
+    @media (max-width: 1280px) {
+      font-size: calc(2.4rem + (60 - 24) * (100vw - 320px) / (1280 - 320));
+    }
+
+    &.fadeOutCity {
+      a {
+        opacity: 0;
+      }
+    }
+
+    &.selectedCity {
+      a {
+        cursor: default;
+        color: $white;
+        transform: scale(1.08); 
+        opacity: 1;
+        transition: all 0.8s;
+        -webkit-text-stroke-width: 0;
+      } 
+    }
+  }
+
+  a {
     color: transparent;
     font-family: "Campton Semibold", sans-serif;
     letter-spacing: 1px;
     margin: 0 auto;
     text-transform: lowercase;
     transform: scale(1);
-    transition: opacity 0.3s;
-    opacity: 1;
     -webkit-text-stroke: 1.4px $black;
-    
-    &.selectedCity {
-      color: $white;
-      transform: scale(1.08); 
-      transition: all 0.8s;
-      opacity: 1;
-      cursor: default;
+
+    @media (max-width: 1280px) {
       font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1280 - 320));
-  
-      &:hover {
-        color: $white;
-        transform: scale(1.2);
-        cursor: default;
-      }
     }
 
-    &.fadeOutCity {
-      opacity: 0;
-    }
-    
     &:hover {
       cursor: pointer;
       transform: scale(1.05);
