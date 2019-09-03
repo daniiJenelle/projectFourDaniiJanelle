@@ -278,8 +278,8 @@ header h1 {
           animation-duration: 0.5s;
   position: relative;
   top: 0;
-  -webkit-transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
-  transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
+  -webkit-transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
+  transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
 }
 
 @media (max-width: 1280px) {
@@ -469,11 +469,29 @@ header .searchHint.hideHint {
   padding: 12px;
 }
 
+@media (max-width: 670px) {
+  .dashboardWrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 100%;
+  }
+}
+
 .dashboardLeft,
 .dashboardRight {
   margin: 30px 15px 0;
   width: 50%;
   height: calc(100% - 30px);
+}
+
+@media (max-width: 670px) {
+  .dashboardLeft,
+  .dashboardRight {
+    width: 100%;
+    margin: 30px 0 0;
+  }
 }
 
 .dashboardRight {
@@ -482,6 +500,12 @@ header .searchHint.hideHint {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+@media (max-width: 670px) {
+  .dashboardLeft {
+    height: 90%;
+  }
 }
 
 .cityPhoto {
@@ -786,11 +810,85 @@ header .searchHint.hideHint {
 }
 
 .dateTime {
-  text-align: center;
+  font-size: calc(1.2rem + (14 - 12)*(100vw - 350px)/(1280 - 350));
+  text-transform: lowercase;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
-.dateTime p {
-  font-size: calc(1.6rem + (20 - 16)*(100vw - 350px)/(1280 - 350));
+@media (max-width: 900px) {
+  .dateTime {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+.dateTime div {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 900px) {
+  .dateTime div {
+    width: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-line-pack: center;
+        align-content: center;
+  }
+}
+
+.dateTime div:nth-of-type(1) {
+  color: #000;
+}
+
+@media (max-width: 900px) {
+  .dateTime div:nth-of-type(1) {
+    height: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .dateTime div:nth-of-type(1) {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.dateTime .date {
+  font-size: calc(1.6rem + (20 - 16)*(100vw - 900px)/(1280 - 900));
+}
+
+.dateTime h4 {
+  font-size: 1.8rem;
+}
+
+.dateTime .time {
+  font-size: calc(4rem + (60 - 40)*(100vw - 900px)/(1280 - 900));
+  color: transparent;
+  font-family: "Campton Semibold", sans-serif;
+  opacity: 1;
+  -webkit-text-stroke: 1.4px #000;
+}
+
+@media (max-width: 900px) {
+  .dateTime .time {
+    font-size: 4rem;
+  }
 }
 
 .weather,
@@ -798,55 +896,121 @@ header .searchHint.hideHint {
   width: calc(50% - 15px);
   height: calc(50% - 15px);
   margin-bottom: 30px;
+  padding: 5% 0;
   background: #DBDBDB;
-}
-
-.weather {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-right: 30px;
-}
-
-.weather div {
-  width: calc(100% / 3);
-}
-
-.weather {
-  font-size: calc(1.2rem + (16 - 12)*(100vw - 350px)/(1280 - 350));
-  color: #5d5d5d;
-  text-align: center;
-}
-
-.weather h3 {
-  color: #000;
-}
-
-.weather div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 2vh;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .weather,
+  .dateTime {
+    width: calc(100%);
+    height: calc(25% - 30px);
+    padding: 0 5%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 670px) {
+  .weather,
+  .dateTime {
+    height: calc(50% - 15px);
+  }
+}
+
+.weather {
+  margin-right: 30px;
+  background: #d4e7de;
+  font-size: 1.6rem;
+}
+
+@media (max-width: 900px) {
+  .weather {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    margin-right: 0;
+  }
+}
+
+.weather h4 {
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.weather div {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+@media (max-width: 900px) {
+  .weather div {
+    width: calc(100% / 3);
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 .weather .temperature {
-  font-size: calc(4rem + (68 - 40)*(100vw - 350px)/(1280 - 350));
-  color: #000;
+  font-size: calc(4rem + (60 - 40)*(100vw - 900px)/(1280 - 900));
+  color: transparent;
+  font-family: "Campton Semibold", sans-serif;
+  opacity: 1;
+  -webkit-text-stroke: 1.4px #000;
+}
+
+@media (max-width: 900px) {
+  .weather .temperature {
+    font-size: 4rem;
+  }
 }
 
 .weather .weatherIcon {
   -o-object-fit: cover;
      object-fit: cover;
-  padding: 20%;
+  height: 25%;
+  padding: 0 25%;
+}
+
+.weather .weatherIcon img {
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .weather .weatherIcon {
+    height: 100%;
+    padding: 20px;
+  }
+}
+
+.weather div:nth-of-type(3) h3 {
+  margin-bottom: 5px;
+}
+
+@media (max-width: 900px) {
+  .weather div:nth-of-type(3) p {
+    display: none;
+  }
 }
 /*# sourceMappingURL=styles.css.map */

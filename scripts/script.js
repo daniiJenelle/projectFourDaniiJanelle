@@ -88,7 +88,7 @@ app.getPhoto = function (cityName, countryName) {
     dataType: `json`,
     data: {
       key: `13477328-fc7c4133a7a5d2292102c1037`,
-      q: `${cityName} ${countryName} city`,
+      q: `${cityName} ${countryName} city landscape`,
       image_type: `photo`,
       orientation: `horizontal`,
       min_width: `640`,
@@ -346,7 +346,7 @@ app.displayWeatherDashboard = function (weather, localOffset) {
   const sunset = new Date(weather.sys.sunset * 1000)
   console.log(sunrise)
 
-  $(`.weather`).append(`<div><p class="temperature">${temperature}°C</p><p class="minMax">${tempMax} / ${tempMin}</p></div><div><h3>${weatherTitle}</h3><p>Sunrise: ${sunrise.toLocaleTimeString()}</p><p>Sunset: ${sunset.toLocaleTimeString()}</div><div><img class="weatherIcon" src="${weatherIcon}"></div>`)
+  $(`.weather`).append(`<div><p class="temperature">${temperature}°C</p><p class="minMax">${tempMax} / ${tempMin}</p></div><div class="weatherIcon"><img src="${weatherIcon}"></div><div><h4>${weatherTitle}</h4><p>Sunrise: ${sunrise.toLocaleTimeString()}</p><p>Sunset: ${sunset.toLocaleTimeString()}</div>`)
 }
 
 // function to render time ajax call to the dashboard
@@ -360,7 +360,10 @@ app.displayTimeDashboard = function (time, localOffset) {
     offsetSign = `+`
   }
 
-  $(`.dateTime`).append(`<h3>local time: </h3><p class="date">${displayedTime.toDateString()}</p><p class="time">${displayedTime.toLocaleTimeString()}</p><p class="timezone">GMT ${offsetSign}${localOffset}</p><p>(${app.timezone})</p>`);
+  let minutes = displayedTime.getMinutes()
+  minutes = minutes > 9 ? minutes : '0' + minutes;
+
+  $(`.dateTime`).append(`<div><h4>local time</h4><p class="date">${displayedTime.toDateString()}</p></div><div><p class="time">${displayedTime.getHours()}:${minutes}</p></div><div><p class="timezone">GMT ${offsetSign}${localOffset}</p><p>(${app.timezone})</p></div>`);
 }
 
 // function to render photo ajax call to the dashboard

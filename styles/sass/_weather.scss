@@ -1,42 +1,87 @@
 .weather,
 .dateTime {
-  width: calc(50% - 15px);
-  height: calc(50% - 15px);
-  margin-bottom: 30px;
-  background: $lightGrey;
-}
-
-.weather {
+    width: calc(50% - 15px);
+    height: calc(50% - 15px);
+    margin-bottom: 30px;
+    padding: 5% 0;
+    background: $lightGrey;
     display: flex;
-    margin-right: 30px;
-    div {
-        width: calc(100% / 3);
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+
+    @media (max-width: 900px) {
+        width: calc(100%);
+        height: calc(25% - 30px);
+        padding: 0 5%;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    @media (max-width: 670px) {
+        height: calc(50% - 15px);
     }
 }
 
 .weather {
+    margin-right: 30px;
+    background: lighten($teal, 8%);
+    font-size: 1.6rem;
+
+    @media (max-width: 900px) {
+        flex-direction: row;
+        margin-right: 0;
+    }
     
-    font-size: calc(1.2rem + (16 - 12)*(100vw - 350px)/(1280 - 350));
-    color: rgb(93,93,93);
-    text-align: center;
-    h3 {
+    h4 {
         color: $black;
+        margin-bottom: 5px;
     }
     div {
+        width: 100%;
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
-        padding: 2vh;
+        @media (max-width: 900px) {
+            width: calc(100% / 3);
+            justify-content: center;
+        }
     }
+
     .temperature {
-        // font-size: 6.8rem;
-        font-size: calc(4rem + (68 - 40)*(100vw - 350px)/(1280 - 350));
-        color: $black
-        
+        font-size: calc(4rem + (60 - 40)*(100vw - 900px)/(1280 - 900));
+        color: transparent;
+        font-family: $semibold;
+        opacity: 1;
+        -webkit-text-stroke: 1.4px $black;
+
+        @media (max-width: 900px) {
+        font-size: 4rem;
+    }
+
     }
     .weatherIcon {
         object-fit: cover;
-        padding: 20%;
+        height: 25%;
+        padding: 0 25%;
+        img {
+            height: 100%;
+        }
+        @media (max-width: 900px) {
+            height: 100%;
+            padding: 20px;
+        }
+    }
+    div:nth-of-type(3) {
+        h3 {
+            margin-bottom: 5px;
+        }
+        @media (max-width: 900px) {
+            // align-items: flex-end;
+
+            p {
+                display: none;
+            }
+        }
+
     }
 }

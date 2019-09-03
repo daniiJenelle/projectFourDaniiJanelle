@@ -9,12 +9,16 @@
     width: 95%;
     height: 100vh;
     margin: 0 auto;
-    // border: 1px solid purple;
 
     a {
     text-decoration: none;
     color: $black;
     padding: 12px;
+    }
+
+    @media (max-width: 670px) {
+      flex-direction: column;
+      width: 100%;
     }
 }
 
@@ -23,12 +27,23 @@
     margin: 30px 15px 0;
     width: 50%;
     height: calc(100% - 30px);
-    // border: 2px solid tomato;
+
+    @media (max-width: 670px) {
+      width: 100%;
+      margin: 30px 0 0;
+    }
+
 }
 
 .dashboardRight {
   display: flex;
   flex-wrap: wrap;
+}
+
+.dashboardLeft {
+  @media (max-width: 670px) {
+      height: 90%;
+    }
 }
 
 .cityPhoto {
