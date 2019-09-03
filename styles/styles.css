@@ -278,8 +278,8 @@ header h1 {
           animation-duration: 0.5s;
   position: relative;
   top: 0;
-  -webkit-transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
-  transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
+  -webkit-transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
+  transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
 }
 
 @media (max-width: 1280px) {
@@ -517,6 +517,19 @@ header .searchHint.hideHint {
 }
 
 .cityName {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   height: 30%;
   margin-bottom: 30px;
   text-transform: lowercase;
@@ -594,7 +607,7 @@ header .searchHint.hideHint {
   overflow-y: auto;
   height: calc(70% - 30px);
   padding: 20px;
-  background: #c9c9c9;
+  background: #e8e8e8;
 }
 
 .news h4 {
@@ -632,6 +645,7 @@ header .searchHint.hideHint {
 }
 
 .news .singleArticle p.articleDate {
+  margin-bottom: 5px;
   color: grey;
 }
 
@@ -653,7 +667,6 @@ header .searchHint.hideHint {
 }
 
 .cityPopUp {
-  border: 3px solid blue;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -825,6 +838,7 @@ header .searchHint.hideHint {
   -webkit-transform: scale(1);
           transform: scale(1);
   -webkit-text-stroke: 1.4px #000;
+  position: relative;
 }
 
 @media (max-width: 1280px) {
@@ -838,6 +852,18 @@ header .searchHint.hideHint {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
   color: #000;
+}
+
+.cityList a:hover::after {
+  content: '';
+  display: block;
+  width: 110%;
+  height: 48%;
+  background: #BAD8CA;
+  position: absolute;
+  mix-blend-mode: multiply;
+  top: 62%;
+  left: -3%;
 }
 
 .dateTime {

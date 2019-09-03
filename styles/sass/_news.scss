@@ -2,7 +2,7 @@
   overflow-y: auto;
   height: calc(70% - 30px);
   padding: 20px;
-  background: $darkGrey;
+  background: lighten($lightGrey, 5%);
 
   h4 {
     font-family: "Campton Semibold", sans-serif;
@@ -31,6 +31,7 @@
     p {
       font-size: 1.4rem;
       &.articleDate {
+        margin-bottom: 5px;
         color: grey;
       }
 

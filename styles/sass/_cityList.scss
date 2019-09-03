@@ -1,5 +1,4 @@
 .cityPopUp {
-  border: 3px solid blue;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,6 +133,7 @@
     text-transform: lowercase;
     transform: scale(1);
     -webkit-text-stroke: 1.4px $black;
+    position: relative;
 
     @media (max-width: 1280px) {
       font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1280 - 320));
@@ -143,6 +143,18 @@
       cursor: pointer;
       transform: scale(1.05);
       color: $black;
+      
+      &::after {
+        content: '';
+        display: block;
+        width: 110%;
+        height: 48%;
+        background: #BAD8CA;
+        position: absolute;
+        mix-blend-mode: multiply;
+        top: 62%;
+        left: -3%;
+      }
     }
   }
 }

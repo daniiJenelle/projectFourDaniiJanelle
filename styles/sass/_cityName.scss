@@ -1,4 +1,8 @@
 .cityName {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 30%;
   margin-bottom: 30px;
   text-transform: lowercase;
@@ -48,17 +52,17 @@
       display: inline-block;
 
       &::after {
-      content: '';
-      display: block;
-      width: 110%;
-      height: 48%;
-      background: #BAD8CA;
-      position: absolute;
-      z-index: 0;
-      mix-blend-mode: multiply;
-      top: 62%;
-      left: -3%;
-    }
+        content: '';
+        display: block;
+        width: 110%;
+        height: 48%;
+        background: #BAD8CA;
+        position: absolute;
+        z-index: 0;
+        mix-blend-mode: multiply;
+        top: 62%;
+        left: -3%;
+      }
     }
   }
 }
