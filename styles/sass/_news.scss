@@ -1,6 +1,6 @@
 .news {
   overflow-y: auto;
-  height: calc(80% - 30px);
+  height: calc(70% - 30px);
   padding: 20px;
   background: $darkGrey;
 
@@ -19,6 +19,9 @@
     width: 50%;
     border-top: 1px solid black;
     
+    @media (max-width: 800px) {
+      width: 100%;
+    }
 
     h5 {
       font-size: 1.4rem;
@@ -40,6 +43,10 @@
     img {
       max-height: 260px;
       object-fit: cover;
+
+      @media (max-width: 670px) {
+      max-height: 40%;
+    }
     }
   }
 }

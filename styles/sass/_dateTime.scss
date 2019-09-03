@@ -5,7 +5,8 @@
 
     @media (max-width: 900px) {
         flex-direction: column;
-        align-items: center
+        align-items: center;
+        font-size: 1.2rem;
     }
 
     div {
@@ -35,6 +36,10 @@
 
     .date {
         font-size: calc(1.6rem + (20 - 16)*(100vw - 900px)/(1280 - 900));
+
+        @media (max-width: 900px) {
+            font-size: 1.6rem;
+        }
     }
 
     h4 {
