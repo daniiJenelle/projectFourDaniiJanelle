@@ -103,9 +103,11 @@ app.getPhoto = function (cityName, countryName) {
 // listen for what user is typing in the input to show as search hint
 app.checkUserInput = function () {
   $('form').keyup(e => {
-    app.userInput = $(`:text`).val();
+    app.userInput = $(`:text`).val().toLowerCase();
+    $('#searchHint').text(`hit enter to search ${app.userInput}`);
 
     if (app.userInput.length <= 2 && e.key === 'Enter') {
+      $('#screenReaderFormFeedback').text(`enter a city name with 3 or more letters`);
       $('#searchHint').text(`enter a city name with 3 or more letters`);
       $('#searchHint').addClass('showHint');
     } else if (app.userInput.length >= 3 && e.key !== 'Enter') {
@@ -136,19 +138,25 @@ app.searchCityAutocomplete = async function (cityName) {
     let matchedCities = await app.getCityNames(cityName);
 
     if (matchedCities[0] === '' || matchedCities.length === 0) {
+      $('#screenReaderFormFeedback').text('no results found. please check spelling or try another city.');
       $('#searchHint').text('no results found. try again.');
       $('#searchHint').addClass('shake');
       $('#searchHint').one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function (e) {
         $('#searchHint').removeClass('shake');
       });
+      $('#searchCity').focus();
       return;
+    } else if (matchedCities.length > 1) {
+      app.takeMeToLetterTypingAnimation();
+    } else if (matchedCities.length === 1) {
+      $('h1')[0].innerHTML = 'taking you to'
     }
 
     $('#searchHint').removeClass('showHint');
-    $('#searchHint').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function (e) {
+    setTimeout(() => {
       $('#searchHint').text('');
-    });
-    app.takeMeToAnimation();
+    }, 500)
+
     app.handleMatchedCities(matchedCities);
 
   } catch (error) {
@@ -157,7 +165,7 @@ app.searchCityAutocomplete = async function (cityName) {
 }
 
 // animation for h1 to slide up
-app.takeMeToAnimation = function () {
+app.takeMeToLetterTypingAnimation = function () {
   const userInputLetters = app.userInput.split('')
   userInputLetters.unshift(' ');
 
@@ -207,17 +215,23 @@ app.popUpModalAnimation = function () {
     $('.cityList').addClass('zoomIn').addClass('opacityChange');
     $('#citySearchForm').css('opacity', '0');
 
+    setTimeout(() => {
+      $('#closeX').addClass('zoomIn');
+    }, 500);
+
     // listening for click on X to close the pop up modal
     $('#closeX').click(() => {
       $('.cityList').removeClass('zoomIn').addClass('zoomOut').removeClass('opacityChange');
       $('#cityPopUp').removeClass('visibilityChange');
       $('.cityList').empty();
-      $('#searchHint').text(`hit enter to search ${app.userInput}`);
-      $('#searchHint').addClass('showHint');
       $('h1').removeClass('shiftUp');
       $('h1')[0].innerHTML = 'take me to';
       $('#citySearchForm').delay(1500).css('opacity', '1');
       $('.cityList').removeClass('zoomOut');
+      $('#closeX').removeClass('zoomIn');
+      $('#searchHint').text(`hit enter to search ${app.userInput}`);
+      $('#searchHint').addClass('showHint');
+      $('#citySearch').focus();
     });
   }, 1400);
 };
@@ -225,17 +239,14 @@ app.popUpModalAnimation = function () {
 // listen for which matched city the user clicks on
 app.chooseCityFromList = function (matchedCities) {
   $('.cityList').on('click', 'li', function () {
+    $(this).children('a').blur();
+    $('#closeX').removeClass('zoomIn');
     $('.cityList li:not(.selectedCity)').addClass('fadeOutCity');
 
-    $('li').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
-      function (e) {
-        $(this).addClass('selectedCity');
-      });
-
-    $('.cityList li:not(.selectedCity)').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
-      function (e) {
-        $('.cityList li:not(.selectedCity)').css('display', 'none');
-      });
+    setTimeout(() => {
+      $(this).addClass('selectedCity');
+      $('.cityList li:not(.selectedCity)').css('display', 'none');
+    }, 300);
 
     $('.cityList').addClass('fadeBlack');
     $('h1').text('taking you to');
@@ -247,7 +258,18 @@ app.chooseCityFromList = function (matchedCities) {
 
     app.searchHandleCityInfo(app.chosenCityName);
     $('.cityList').off();
+
+    // RESET FORM
+    setTimeout(() => {
+      $('h1')[0].innerHTML = 'take me to'
+      $('#cityList').empty();
+      $('#cityPopUp').removeClass('visibilityChange');
+      $('#citySearchForm').css('opacity', '1');
+      $('#searchHint').text('search for another city');
+      $('#searchHint').addClass('showHint');
+    }, 2000);
   });
+
 }
 
 // use chosen city to invoke search to retrieve city information
@@ -280,12 +302,11 @@ app.smoothScroll = function () {
 
 // smoothscroll function for when user input only has one result
 app.smoothScrollOneChoice = function () {
-  $(`html`).delay(2300).animate({
+  $(`html`).delay(500).animate({
     scrollTop: $(`#dashboard`).offset().top
   }, 900, function () {
     window.location.hash = `#dashboard`;
   });
-
 }
 
 // function to clear hash on refresh
@@ -294,7 +315,6 @@ app.clearHash = function () {
     location.hash = ``;
   });
 }
-
 
 // function to render News ajax call to the dashboard
 app.displayNewsDashboard = function (news) {
@@ -360,8 +380,7 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
     photo = await app.getPhoto('town', countryName);
   }
 
-  $(`.cityName`).append(`<h3>${officialCityName} ${countryName}</h3>`)
-
+  $(`.cityName`).append(`<h3><span>${officialCityName},</span></h3> <h3><span>${countryName}</span></h3>`);
 
   app.displayNewsDashboard(news);
   app.displayWeatherDashboard(weather, localOffset);
@@ -372,8 +391,8 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
 // INIT FUNCTION
 app.init = function () {
   app.checkUserInput();
-  app.smoothScroll();
   app.clearHash();
+  app.smoothScroll();
 };
 
 // DOCUMENT READY

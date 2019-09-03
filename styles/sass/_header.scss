@@ -4,7 +4,7 @@ body {
 }
 
 header {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   background: $black;
@@ -41,14 +41,30 @@ header {
                 top 0.6s 0.3s ease-out;
 
     @media (max-width: 1280px) {
-      font-size: calc(3.2rem + (48 - 32) * (100vw - 320px) / (1280 - 320));
+      font-size: calc(2.6rem + (48 - 26) * (100vw - 320px) / (1280 - 320));
+    }
+
+    @media (max-width: 480px) {
+      margin-bottom: 0;
     }
 
     &.shiftUp {
       position: relative;
-      top: -35%;
+      top: -33%;
       font-size: 2.8rem;
       font-family: "Campton Medium", sans-serif;
+
+      @media (max-width: 1080px) {
+        top: -35%;
+      }
+
+      @media (max-width: 768px) {
+        top: -36%;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 2rem;
+      }
     }
 
     &.transparent {
@@ -74,7 +90,7 @@ header {
     letter-spacing: 1.5px;
     text-align: center;
     color: transparent;
-    -webkit-text-stroke: 2px $white;
+    -webkit-text-stroke: 2px $brightTeal;
     text-transform: lowercase;
     caret-color: $white;
     transition: border-bottom 0.3s, padding-bottom 0.3s;
@@ -84,20 +100,25 @@ header {
       font-size: calc(3.2rem + (100 - 32) * (100vw - 320px) / (1280 - 320));
     }
 
+    @media (max-width: 980px) {
+      width: 90%;
+    }
+
     @media (max-width: 480px) {
       font-family: "Campton Semibold", sans-serif;
       width: 100%;
       color: $white;
-      -webkit-text-stroke-width: 0px;
+      -webkit-text-stroke-width: 0;
     }
     
     &::placeholder {
+      color: transparent;
       opacity: 0.5;
 
       @media (max-width: 480px) {
-        font-family: "Campton Semibold", sans-serif;
+        color: $white;
+        opacity: 0.5;
         width: 100%;
-        -webkit-text-stroke-width: 0px;
       }
     }
 

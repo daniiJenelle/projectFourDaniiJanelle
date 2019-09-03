@@ -234,7 +234,7 @@ body {
 }
 
 header {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   background: #000;
@@ -284,15 +284,39 @@ header h1 {
 
 @media (max-width: 1280px) {
   header h1 {
-    font-size: calc(3.2rem + (48 - 32) * (100vw - 320px) / (1280 - 320));
+    font-size: calc(2.6rem + (48 - 26) * (100vw - 320px) / (1280 - 320));
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    margin-bottom: 0;
   }
 }
 
 header h1.shiftUp {
   position: relative;
-  top: -35%;
+  top: -33%;
   font-size: 2.8rem;
   font-family: "Campton Medium", sans-serif;
+}
+
+@media (max-width: 1080px) {
+  header h1.shiftUp {
+    top: -35%;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1.shiftUp {
+    top: -36%;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1.shiftUp {
+    font-size: 2rem;
+  }
 }
 
 header h1.transparent {
@@ -316,7 +340,7 @@ header input[type="text"] {
   letter-spacing: 1.5px;
   text-align: center;
   color: transparent;
-  -webkit-text-stroke: 2px #E7E6E6;
+  -webkit-text-stroke: 2px #94d3b4;
   text-transform: lowercase;
   caret-color: #E7E6E6;
   -webkit-transition: border-bottom 0.3s, padding-bottom 0.3s;
@@ -331,51 +355,61 @@ header input[type="text"] {
   }
 }
 
+@media (max-width: 980px) {
+  header input[type="text"] {
+    width: 90%;
+  }
+}
+
 @media (max-width: 480px) {
   header input[type="text"] {
     font-family: "Campton Semibold", sans-serif;
     width: 100%;
     color: #E7E6E6;
-    -webkit-text-stroke-width: 0px;
+    -webkit-text-stroke-width: 0;
   }
 }
 
 header input[type="text"]::-webkit-input-placeholder {
+  color: transparent;
   opacity: 0.5;
 }
 
 header input[type="text"]:-ms-input-placeholder {
+  color: transparent;
   opacity: 0.5;
 }
 
 header input[type="text"]::-ms-input-placeholder {
+  color: transparent;
   opacity: 0.5;
 }
 
 header input[type="text"]::placeholder {
+  color: transparent;
   opacity: 0.5;
 }
 
 @media (max-width: 480px) {
   header input[type="text"]::-webkit-input-placeholder {
-    font-family: "Campton Semibold", sans-serif;
+    color: #E7E6E6;
+    opacity: 0.5;
     width: 100%;
-    -webkit-text-stroke-width: 0px;
   }
   header input[type="text"]:-ms-input-placeholder {
-    font-family: "Campton Semibold", sans-serif;
+    color: #E7E6E6;
+    opacity: 0.5;
     width: 100%;
-    -webkit-text-stroke-width: 0px;
   }
   header input[type="text"]::-ms-input-placeholder {
-    font-family: "Campton Semibold", sans-serif;
+    color: #E7E6E6;
+    opacity: 0.5;
     width: 100%;
-    -webkit-text-stroke-width: 0px;
   }
   header input[type="text"]::placeholder {
-    font-family: "Campton Semibold", sans-serif;
+    color: #E7E6E6;
+    opacity: 0.5;
     width: 100%;
-    -webkit-text-stroke-width: 0px;
   }
 }
 
@@ -471,13 +505,18 @@ header .searchHint.hideHint {
   color: transparent;
 }
 
+@media (max-width: 1080px) {
+  .cityName h2 {
+    font-size: calc(3.2rem + (45 - 32) * (100vw - 320px) / (1080 - 320));
+  }
+}
+
 .cityName h3 {
+  display: inline-block;
   margin-top: -1rem;
   font-size: 6rem;
   color: #000;
   -webkit-text-stroke: none;
-  position: relative;
-  z-index: 10;
   line-height: 1;
   margin-top: 1px;
 }
@@ -488,23 +527,24 @@ header .searchHint.hideHint {
   }
 }
 
-.cityName h3::after {
+.cityName h3 span {
+  position: relative;
+  z-index: 10;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.cityName h3 span::after {
   content: '';
   display: block;
-  width: 50rem;
-  height: 30px;
+  width: 110%;
+  height: 48%;
   background: #BAD8CA;
   position: absolute;
   z-index: 0;
   mix-blend-mode: multiply;
-  top: 3.6rem;
-  left: -1rem;
-}
-
-@media (max-width: 1080px) {
-  .cityName h3::after {
-    width: calc(20rem + (500 - 200) * (100vw - 320px) / (1080 - 320));
-  }
+  top: 62%;
+  left: -3%;
 }
 
 .news {
@@ -594,23 +634,62 @@ header .searchHint.hideHint {
           align-items: center;
 }
 
+@media (max-width: 480px) {
+  .cityListContainer {
+    width: 100%;
+  }
+}
+
 .closeX {
   position: absolute;
   top: 18px;
   left: 18px;
   z-index: 100;
   font-size: 4.5rem;
-  color: #000;
   cursor: pointer;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
+  color: #000;
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
 }
 
-.closeX:hover {
+.closeX.zoomIn {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+@media (max-width: 600px) {
+  .closeX.zoomIn {
+    -webkit-transform: scale(1) translate(-50%);
+            transform: scale(1) translate(-50%);
+    color: #E7E6E6;
+    top: auto;
+    bottom: -70px;
+    left: 50%;
+  }
+}
+
+@media (max-width: 320px) {
+  .closeX.zoomIn {
+    bottom: -63px;
+  }
+}
+
+.closeX.zoomIn:hover {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
+}
+
+@media (max-width: 600px) {
+  .closeX.zoomIn:hover {
+    -webkit-transform: scale(1.2) translate(-50%);
+            transform: scale(1.2) translate(-50%);
+  }
 }
 
 .cityList {
@@ -653,9 +732,36 @@ header .searchHint.hideHint {
   background: transparent;
 }
 
-.cityList li,
-.cityList a {
+.cityList li {
+  font-size: 6rem;
   width: 100%;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+@media (max-width: 1280px) {
+  .cityList li {
+    font-size: calc(2.4rem + (60 - 24) * (100vw - 320px) / (1280 - 320));
+  }
+}
+
+.cityList li.fadeOutCity a {
+  opacity: 0;
+}
+
+.cityList li.selectedCity a {
+  cursor: default;
+  color: #E7E6E6;
+  -webkit-transform: scale(1.08);
+          transform: scale(1.08);
+  opacity: 1;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
+  -webkit-text-stroke-width: 0;
+}
+
+.cityList a {
   color: transparent;
   font-family: "Campton Semibold", sans-serif;
   letter-spacing: 1px;
@@ -663,38 +769,15 @@ header .searchHint.hideHint {
   text-transform: lowercase;
   -webkit-transform: scale(1);
           transform: scale(1);
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s;
-  opacity: 1;
   -webkit-text-stroke: 1.4px #000;
 }
 
-.cityList li.selectedCity,
-.cityList a.selectedCity {
-  color: #E7E6E6;
-  -webkit-transform: scale(1.08);
-          transform: scale(1.08);
-  -webkit-transition: all 0.8s;
-  transition: all 0.8s;
-  opacity: 1;
-  cursor: default;
-  font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1280 - 320));
+@media (max-width: 1280px) {
+  .cityList a {
+    font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1280 - 320));
+  }
 }
 
-.cityList li.selectedCity:hover,
-.cityList a.selectedCity:hover {
-  color: #E7E6E6;
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-  cursor: default;
-}
-
-.cityList li.fadeOutCity,
-.cityList a.fadeOutCity {
-  opacity: 0;
-}
-
-.cityList li:hover,
 .cityList a:hover {
   cursor: pointer;
   -webkit-transform: scale(1.05);
