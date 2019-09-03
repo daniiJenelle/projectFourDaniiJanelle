@@ -1,7 +1,54 @@
 .dateTime {
-    text-align: center;
-    
-    p {
-        font-size: calc(1.6rem + (20 - 16)*(100vw - 350px)/(1280 - 350));
+    font-size: calc(1.2rem + (14 - 12)*(100vw - 350px)/(1280 - 350));
+    text-transform: lowercase;
+    flex-wrap: wrap;
+
+    @media (max-width: 900px) {
+        flex-direction: column;
+        align-items: center
+    }
+
+    div {
+        justify-content: center;
+        align-items: center;
+
+        @media (max-width: 900px) {
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+        }
+
+        &:nth-of-type(1) {
+        color: $black;
+
+        @media (max-width: 900px) {
+            height: 100%;
+        }
+
+        @media (max-width: 900px) {
+            flex-direction: column;
+        }
+        }
+
+    }
+
+    .date {
+        font-size: calc(1.6rem + (20 - 16)*(100vw - 900px)/(1280 - 900));
+    }
+
+    h4 {
+        font-size: 1.8rem;
+    }
+    .time {
+        font-size: calc(4rem + (60 - 40)*(100vw - 900px)/(1280 - 900));
+        color: transparent;
+        font-family: $semibold;
+        opacity: 1;
+        -webkit-text-stroke: 1.4px $black;
+
+        @media (max-width: 900px) {
+        font-size: 4rem;
+        }
     }
 }
