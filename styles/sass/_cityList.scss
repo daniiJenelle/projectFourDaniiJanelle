@@ -71,7 +71,7 @@
   padding: 2% 0 3%;
   border: 5px solid $white;
   
-  font-family: "Campton Semibold", sans-serif;
+  font-family: $med;
   font-size: 4.5rem;
   text-align: center;
   list-style: none;
@@ -127,7 +127,7 @@
 
   a {
     color: transparent;
-    font-family: "Campton Semibold", sans-serif;
+    font-family: $med;
     letter-spacing: 1px;
     margin: 0 auto;
     text-transform: lowercase;

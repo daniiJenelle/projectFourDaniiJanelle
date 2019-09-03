@@ -6,7 +6,7 @@
   height: 30%;
   margin-bottom: 30px;
   text-transform: lowercase;
-  font-family: "Campton Semibold", sans-serif;
+  font-family: $med;
 
   @media (max-width: 670px) {
     padding: 0 5%;
