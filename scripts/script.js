@@ -184,14 +184,12 @@ app.takeMeToLetterTypingAnimation = function () {
 
 // checks data from returned city names
 app.handleMatchedCities = function (matchedCities) {
-  console.log(matchedCities)
   if (matchedCities.length > 1) {
     // render all cities that matches user input to the DOM
     app.renderMatchedCitiesList(matchedCities);
     app.chooseCityFromList(matchedCities);
   } else {
     app.chosenCityName = matchedCities[0].replace(/,.*?,/, '').replace(/\(.*?\)/, '').replace(/Korea, South/, '')
-    console.log(app.chosenCityName);
     app.searchHandleCityInfo(app.chosenCityName);
     app.smoothScrollOneChoice();
   }
@@ -274,19 +272,19 @@ app.chooseCityFromList = function (matchedCities) {
 
 // use chosen city to invoke search to retrieve city information
 app.searchHandleCityInfo = async function (chosenCity) {
-  let chosenCityInfo = await app.getCityInfo(chosenCity);
-  console.log(chosenCityInfo);
-  console.log('Info of chosen city has been stored');
-  app.officialCityName = chosenCityInfo[0].EnglishName;
-  app.countryName = chosenCityInfo[0].Country.EnglishName;
-  app.latitude = chosenCityInfo[0].GeoPosition.Latitude;
-  app.longitude = chosenCityInfo[0].GeoPosition.Longitude;
-  app.localOffset = chosenCityInfo[0].TimeZone.GmtOffset;
-  app.timezone = chosenCityInfo[0].TimeZone.Name;
-  console.log(app.timezone)
+  try {
+    let chosenCityInfo = await app.getCityInfo(chosenCity);
+    app.officialCityName = chosenCityInfo[0].EnglishName;
+    app.countryName = chosenCityInfo[0].Country.EnglishName;
+    app.latitude = chosenCityInfo[0].GeoPosition.Latitude;
+    app.longitude = chosenCityInfo[0].GeoPosition.Longitude;
+    app.localOffset = chosenCityInfo[0].TimeZone.GmtOffset;
+    app.timezone = chosenCityInfo[0].TimeZone.Name;
 
-  console.log(app.officialCityName, app.countryName, app.latitude, app.longitude, app.localOffset);
-  app.dashboardAPICalls(app.officialCityName, app.countryName, app.latitude, app.longitude, app.localOffset);
+    app.dashboardAPICalls(app.officialCityName, app.countryName, app.latitude, app.longitude, app.localOffset);
+  } catch (error) {
+    alert('⚠️ API is not working... so go home and sleep 🔥')
+  }
 }
 
 // smoothscroll function for user making choice from city list
@@ -338,13 +336,11 @@ app.displayNewsDashboard = function (news) {
 app.displayWeatherDashboard = function (weather, localOffset) {
   const weatherTitle = weather.weather[0].description
   const temperature = Math.round(weather.main.temp)
-  console.log(weather.weather[0].icon)
   const weatherIcon = `./styles/assets/images/weatherIcons/${weather.weather[0].icon}.svg`
   const tempMin = Math.round(weather.main.temp_min)
   const tempMax = Math.round(weather.main.temp_max)
   const sunrise = new Date(weather.sys.sunrise * 1000)
   const sunset = new Date(weather.sys.sunset * 1000)
-  console.log(sunrise)
 
   $(`.weather`).append(`<div><p class="temperature">${temperature}°C</p><p class="minMax">${tempMax} / ${tempMin}</p></div><div class="weatherIcon"><img src="${weatherIcon}"></div><div><h4>${weatherTitle}</h4><p>Sunrise: ${sunrise.toLocaleTimeString()}</p><p>Sunset: ${sunset.toLocaleTimeString()}</div>`)
 }
@@ -375,20 +371,25 @@ app.displayPhotoDashboard = function (photo) {
 
 // function to retrieve news, time and weather objects and render to dashboard
 app.dashboardAPICalls = async function (officialCityName, countryName, latitude, longitude, localOffset) {
-  const news = await app.getNews(officialCityName, countryName);
-  const time = await app.getTimezone(latitude, longitude);
-  const weather = await app.getWeather(latitude, longitude);
-  let photo = await app.getPhoto(officialCityName, countryName);
-  if (photo.hits == 0) {
-    photo = await app.getPhoto('town', countryName);
+
+  try {
+    const news = await app.getNews(officialCityName, countryName);
+    const time = await app.getTimezone(latitude, longitude);
+    const weather = await app.getWeather(latitude, longitude);
+    let photo = await app.getPhoto(officialCityName, countryName);
+    if (photo.hits == 0) {
+      photo = await app.getPhoto('town', countryName);
+    }
+
+    $(`.cityName`).append(`<h3><span>${officialCityName},</span></h3> <h3><span>${countryName}</span></h3>`);
+
+    app.displayNewsDashboard(news);
+    app.displayWeatherDashboard(weather, localOffset);
+    app.displayTimeDashboard(time, localOffset);
+    app.displayPhotoDashboard(photo);
+  } catch (error) {
+    alert('⚠️ API is not working... so go home and sleep 🔥')
   }
-
-  $(`.cityName`).append(`<h3><span>${officialCityName},</span></h3> <h3><span>${countryName}</span></h3>`);
-
-  app.displayNewsDashboard(news);
-  app.displayWeatherDashboard(weather, localOffset);
-  app.displayTimeDashboard(time, localOffset);
-  app.displayPhotoDashboard(photo);
 }
 
 // INIT FUNCTION
