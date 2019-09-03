@@ -198,11 +198,10 @@ app.handleMatchedCities = function (matchedCities) {
 // if more than 1 matched city, print list of cities on page that match user input
 app.renderMatchedCitiesList = function (matchedCities) {
   matchedCities.forEach((city) => {
-    const liHTML = `<li><a href="#dashboard">${city}</a></li>`
+    const liHTML = `<li><a>${city}</a></li>`
     // prints each city as a list item on page
     $('.cityList').append(liHTML);
   });
-
   app.popUpModalAnimation();
 }
 
@@ -265,7 +264,7 @@ app.chooseCityFromList = function (matchedCities) {
       $('#citySearchForm').css('opacity', '1');
       $('#searchHint').text('search for another city');
       $('#searchHint').addClass('showHint');
-    }, 2000);
+    }, 3500);
   });
 
 }
@@ -289,12 +288,12 @@ app.searchHandleCityInfo = async function (chosenCity) {
 
 // smoothscroll function for user making choice from city list
 app.smoothScroll = function () {
-  $('.cityList').on('click', 'li', () => {
-    $(`html`).animate({
-      scrollTop: $(`#dashboard`).offset().top
-    }, 900, function () {
-      window.location.hash = `#dashboard`;
-    });
+  $('.cityList').on('click', 'a', () => {
+    setTimeout(function () {
+      $(`html`).animate({
+        scrollTop: $(`#dashboard`).offset().top
+      }, 1200);
+    }, 2000);
   });
 }
 
@@ -302,7 +301,7 @@ app.smoothScroll = function () {
 app.smoothScrollOneChoice = function () {
   $(`html`).delay(500).animate({
     scrollTop: $(`#dashboard`).offset().top
-  }, 900, function () {
+  }, 1200, function () {
     window.location.hash = `#dashboard`;
   });
 }
