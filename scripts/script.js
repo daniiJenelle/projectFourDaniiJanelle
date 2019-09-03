@@ -28,7 +28,7 @@ app.getCityInfo = function (chosenCity) {
     method: 'GET',
     dataType: 'json',
     data: {
-      apikey: 'HLfqldOiZiGuEbbAgh9M5aXYeE5TuoAA',
+      apikey: '8N0TB72WQfn4h5q7XlpcRrNzZP7h5FOB',
       q: chosenCity
     }
   });
