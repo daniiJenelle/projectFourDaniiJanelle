@@ -160,7 +160,7 @@ app.searchCityAutocomplete = async function (cityName) {
     app.handleMatchedCities(matchedCities);
 
   } catch (error) {
-    alert('⚠️ API is not working... so go home and sleep 🔥')
+    alert('⚠️ city autocomplete API failed to retrieve city names 🔥');
   }
 }
 
@@ -283,7 +283,7 @@ app.searchHandleCityInfo = async function (chosenCity) {
 
     app.dashboardAPICalls(app.officialCityName, app.countryName, app.latitude, app.longitude, app.localOffset);
   } catch (error) {
-    alert('⚠️ API is not working... so go home and sleep 🔥')
+    alert('⚠️ failed to retrieve information about cities from city API 🔥');
   }
 }
 
@@ -388,7 +388,7 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
     app.displayTimeDashboard(time, localOffset);
     app.displayPhotoDashboard(photo);
   } catch (error) {
-    alert('⚠️ API is not working... so go home and sleep 🔥')
+    alert('⚠️ failed to retrieve news / timezone / weather / photograph info 🔥');
   }
 }
 
