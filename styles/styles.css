@@ -502,12 +502,6 @@ header .searchHint.hideHint {
       flex-wrap: wrap;
 }
 
-@media (max-width: 670px) {
-  .dashboardLeft {
-    height: 90%;
-  }
-}
-
 .cityPhoto {
   width: 100%;
   height: calc(50% - 15px);
@@ -539,7 +533,7 @@ header .searchHint.hideHint {
 @media (max-width: 670px) {
   .cityName {
     padding: 0 5%;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
 }
 
@@ -613,6 +607,12 @@ header .searchHint.hideHint {
 .news h4 {
   font-family: "Campton Semibold", sans-serif;
   font-size: 1.8rem;
+}
+
+@media (max-width: 670px) {
+  .news h4 {
+    text-align: center;
+  }
 }
 
 .news .newsArticleContainer {
@@ -979,7 +979,7 @@ header .searchHint.hideHint {
   .weather,
   .dateTime {
     width: calc(100%);
-    height: calc(25% - 30px);
+    height: 140px;
     padding: 0 5%;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
