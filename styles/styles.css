@@ -517,10 +517,17 @@ header .searchHint.hideHint {
 }
 
 .cityName {
-  height: 20%;
+  height: 30%;
   margin-bottom: 30px;
   text-transform: lowercase;
   font-family: "Campton Semibold", sans-serif;
+}
+
+@media (max-width: 670px) {
+  .cityName {
+    padding: 0 5%;
+    margin-bottom: 15px;
+  }
 }
 
 .cityName h2 {
@@ -535,10 +542,16 @@ header .searchHint.hideHint {
   }
 }
 
+@media (max-width: 670px) {
+  .cityName h2 {
+    font-size: 4rem;
+  }
+}
+
 .cityName h3 {
-  display: inline-block;
+  display: block;
   margin-top: -1rem;
-  font-size: 6rem;
+  font-size: 5rem;
   color: #000;
   -webkit-text-stroke: none;
   line-height: 1;
@@ -547,7 +560,13 @@ header .searchHint.hideHint {
 
 @media (max-width: 1080px) {
   .cityName h3 {
-    font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1080 - 320));
+    font-size: calc(3.2rem + (50 - 32) * (100vw - 320px) / (1080 - 320));
+  }
+}
+
+@media (max-width: 670px) {
+  .cityName h3 {
+    font-size: 4rem;
   }
 }
 
@@ -573,7 +592,7 @@ header .searchHint.hideHint {
 
 .news {
   overflow-y: auto;
-  height: calc(80% - 30px);
+  height: calc(70% - 30px);
   padding: 20px;
   background: #c9c9c9;
 }
@@ -595,6 +614,12 @@ header .searchHint.hideHint {
   cursor: pointer;
   width: 50%;
   border-top: 1px solid black;
+}
+
+@media (max-width: 800px) {
+  .news .singleArticle {
+    width: 100%;
+  }
 }
 
 .news .singleArticle h5 {
@@ -619,6 +644,12 @@ header .searchHint.hideHint {
   max-height: 260px;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+@media (max-width: 670px) {
+  .news .singleArticle img {
+    max-height: 40%;
+  }
 }
 
 .cityPopUp {
@@ -825,6 +856,7 @@ header .searchHint.hideHint {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    font-size: 1.2rem;
   }
 }
 
@@ -871,6 +903,12 @@ header .searchHint.hideHint {
 
 .dateTime .date {
   font-size: calc(1.6rem + (20 - 16)*(100vw - 900px)/(1280 - 900));
+}
+
+@media (max-width: 900px) {
+  .dateTime .date {
+    font-size: 1.6rem;
+  }
 }
 
 .dateTime h4 {
