@@ -28,7 +28,7 @@ app.getCityInfo = function (chosenCity) {
     method: 'GET',
     dataType: 'json',
     data: {
-      apikey: 'HLfqldOiZiGuEbbAgh9M5aXYeE5TuoAA',
+      apikey: '8N0TB72WQfn4h5q7XlpcRrNzZP7h5FOB',
       q: chosenCity
     }
   });
@@ -381,7 +381,7 @@ app.dashboardAPICalls = async function (officialCityName, countryName, latitude,
       photo = await app.getPhoto('town', countryName);
     }
 
-    $(`.cityName`).append(`<h3><span>${officialCityName},</span></h3> <h3><span>${countryName}</span></h3>`);
+    $(`.cityName`).append(`<h2>follow me to</h2><h3><span>${officialCityName},</span></h3> <h3><span>${countryName}</span></h3>`);
 
     app.displayNewsDashboard(news);
     app.displayWeatherDashboard(weather, localOffset);

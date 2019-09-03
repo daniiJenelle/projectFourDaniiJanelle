@@ -50,7 +50,7 @@
     .temperature {
         font-size: calc(4rem + (60 - 40)*(100vw - 900px)/(1280 - 900));
         color: transparent;
-        font-family: $semibold;
+        font-family: $med;
         opacity: 1;
         -webkit-text-stroke: 1.4px $black;
 
