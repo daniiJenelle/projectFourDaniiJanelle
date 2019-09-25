@@ -1,9 +1,9 @@
 // GLOBAL VARIABLES
 $black: #000;
-$lightGrey: #DBDBDB;
+$lightGrey: #dbdbdb;
 $darkGrey: #c9c9c9;
-$white: #E7E6E6;
-$teal: #BAD8CA;
+$white: #e7e6e6;
+$teal: #bad8ca;
 $brightTeal: #94d3b4;
 
 // FONTS
@@ -33,15 +33,36 @@ $bold: "Campton Bold", sans-serif;
   right: 0;
 }
 
+@mixin for-laptops {
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+@mixin for-small-laptops {
+  @media (max-width: 1000px) {
+    @content;
+  }
+}
+@mixin for-tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin for-mobile {
+  @media (max-width: 500px) {
+    @content;
+  }
+}
+
 h1,
 h2,
-h3, 
+h3,
 h4,
 h5,
 div,
 ul,
 p {
-  margin: 0; 
+  margin: 0;
   padding: 0;
 }
 

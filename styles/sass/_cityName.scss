@@ -3,15 +3,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 30%;
-  margin-bottom: 30px;
   text-transform: lowercase;
   font-family: $med;
-
-  @media (max-width: 670px) {
-    padding: 0 5%;
-    margin-bottom: 20px;
-  }
 
   h2 {
     font-size: 4.5rem;
@@ -24,7 +17,7 @@
 
     @media (max-width: 670px) {
       font-size: 4rem;
-    }    
+    }
   }
 
   h3 {
@@ -33,7 +26,7 @@
     font-size: 5rem;
     color: $black;
     -webkit-text-stroke: none;
-    
+
     line-height: 1;
     margin-top: 1px;
 
@@ -43,7 +36,7 @@
 
     @media (max-width: 670px) {
       font-size: 4rem;
-    }    
+    }
 
     span {
       position: relative;
@@ -52,11 +45,11 @@
       display: inline-block;
 
       &::after {
-        content: '';
+        content: "";
         display: block;
         width: 110%;
         height: 48%;
-        background: #BAD8CA;
+        background: #bad8ca;
         position: absolute;
         z-index: 0;
         mix-blend-mode: multiply;

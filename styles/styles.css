@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'Campton Medium';
+  font-family: "Campton Medium";
   src: url("assets/fonts/campton-medium/Campton-Medium.eot");
   /* IE9 Compat Modes */
   src: url("assets/fonts/campton-medium/Campton-Medium.eot?#iefix") format("embedded-opentype"), url("assets/fonts/campton-medium/Campton-Medium.woff2") format("woff2"), url("assets/fonts/campton-medium/Campton-Medium.woff") format("woff"), url("assets/fonts/campton-medium/Campton-Medium.ttf") format("truetype"), url("assets/fonts/campton-medium/Campton-Medium.svg#Campton-Medium") format("svg");
@@ -7,7 +7,7 @@
 }
 
 @font-face {
-  font-family: 'Campton Semibold';
+  font-family: "Campton Semibold";
   src: url("assets/fonts/campton-semibold/Campton-SemiBold.eot");
   /* IE9 Compat Modes */
   src: url("assets/fonts/campton-semibold/Campton-SemiBold.eot?#iefix") format("embedded-opentype"), url("assets/fonts/campton-semibold/Campton-SemiBold.woff2") format("woff2"), url("assets/fonts/campton-semibold/Campton-SemiBold.woff") format("woff"), url("assets/fonts/campton-semibold/Campton-SemiBold.ttf") format("truetype"), url("assets/fonts/campton-semibold/Campton-SemiBold.svg#Campton-SemiBold") format("svg");
@@ -15,18 +15,30 @@
 }
 
 @font-face {
-  font-family: 'Campton Bold';
+  font-family: "Campton Bold";
   src: url("assets/fonts/campton-bold/Campton-Bold.eot");
   /* IE9 Compat Modes */
   src: url("assets/fonts/campton-bold/Campton-Bold.eot?#iefix") format("embedded-opentype"), url("assets/fonts/campton-bold/Campton-Bold.woff2") format("woff2"), url("assets/fonts/campton-bold/Campton-Bold.woff") format("woff"), url("assets/fonts/campton-bold/Campton-Bold.ttf") format("truetype"), url("assets/fonts/campton-bold/Campton-Bold.svg#Campton-Bold") format("svg");
   /* Legacy iOS */
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
   display: block;
 }
 
-audio, canvas, video {
+audio,
+canvas,
+video {
   display: inline-block;
 }
 
@@ -49,7 +61,8 @@ a:focus {
   outline: thin dotted;
 }
 
-a:active, a:hover {
+a:active,
+a:hover {
   outline: 0;
 }
 
@@ -61,7 +74,8 @@ abbr[title] {
   border-bottom: 1px dotted;
 }
 
-b, strong {
+b,
+strong {
   font-weight: 700;
 }
 
@@ -74,7 +88,10 @@ mark {
   color: #000;
 }
 
-code, kbd, pre, samp {
+code,
+kbd,
+pre,
+samp {
   font-family: monospace, serif;
   font-size: 1em;
 }
@@ -85,14 +102,15 @@ pre {
 }
 
 q {
-  quotes: \201C \201D \2018 \2019;
+  quotes: \201c \201d \2018 \2019;
 }
 
 small {
   font-size: 80%;
 }
 
-sub, sup {
+sub,
+sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
@@ -100,11 +118,11 @@ sub, sup {
 }
 
 sup {
-  top: -.5em;
+  top: -0.5em;
 }
 
 sub {
-  bottom: -.25em;
+  bottom: -0.25em;
 }
 
 img {
@@ -118,16 +136,20 @@ svg:not(:root) {
 fieldset {
   border: 1px solid silver;
   margin: 0 2px;
-  padding: .35em .625em .75em;
+  padding: 0.35em 0.625em 0.75em;
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font-family: inherit;
   font-size: 100%;
   margin: 0;
 }
 
-button, input {
+button,
+input {
   line-height: normal;
 }
 
@@ -136,23 +158,26 @@ button, html input[type=button], input[type=reset], input[type=submit] {
   cursor: pointer;
 }
 
-button[disabled], input[disabled] {
+button[disabled],
+input[disabled] {
   cursor: default;
 }
 
-input[type=checkbox], input[type=radio] {
+input[type="checkbox"],
+input[type="radio"] {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 0;
 }
 
-input[type=search] {
+input[type="search"] {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 
-input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration {
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -166,11 +191,14 @@ table {
   border-spacing: 0;
 }
 
-body, figure {
+body,
+figure {
   margin: 0;
 }
 
-legend, button::-moz-focus-inner, input::-moz-focus-inner {
+legend,
+button::-moz-focus-inner,
+input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
@@ -179,7 +207,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   visibility: hidden;
   display: block;
   font-size: 0;
-  content: '';
+  content: "";
   clear: both;
   height: 0;
 }
@@ -205,6 +233,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 h1,
@@ -271,15 +300,15 @@ header h1 {
   font-family: "Campton Medium", sans-serif;
   font-size: 4.5em;
   letter-spacing: 1px;
-  color: #E7E6E6;
+  color: #e7e6e6;
   width: 100%;
   margin-bottom: 1rem;
   -webkit-animation-duration: 0.5s;
           animation-duration: 0.5s;
   position: relative;
   top: 0;
-  -webkit-transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
-  transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
+  -webkit-transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
+  transition: font-size 0.3s ease-out, top 0.6s 0.3s ease-out;
 }
 
 @media (max-width: 1280px) {
@@ -320,7 +349,7 @@ header h1.shiftUp {
 }
 
 header h1.transparent {
-  -webkit-text-stroke: 1px #E7E6E6;
+  -webkit-text-stroke: 1px #e7e6e6;
   color: transparent;
   font-family: "Campton Bold", sans-serif;
 }
@@ -342,7 +371,7 @@ header input[type="text"] {
   color: transparent;
   -webkit-text-stroke: 2px #94d3b4;
   text-transform: lowercase;
-  caret-color: #E7E6E6;
+  caret-color: #e7e6e6;
   -webkit-transition: border-bottom 0.3s, padding-bottom 0.3s;
   transition: border-bottom 0.3s, padding-bottom 0.3s;
   -webkit-animation-delay: 0.5s;
@@ -365,7 +394,7 @@ header input[type="text"] {
   header input[type="text"] {
     font-family: "Campton Semibold", sans-serif;
     width: 100%;
-    color: #E7E6E6;
+    color: #e7e6e6;
     -webkit-text-stroke-width: 0;
   }
 }
@@ -392,29 +421,29 @@ header input[type="text"]::placeholder {
 
 @media (max-width: 480px) {
   header input[type="text"]::-webkit-input-placeholder {
-    color: #E7E6E6;
+    color: #e7e6e6;
     opacity: 0.5;
     width: 100%;
   }
   header input[type="text"]:-ms-input-placeholder {
-    color: #E7E6E6;
+    color: #e7e6e6;
     opacity: 0.5;
     width: 100%;
   }
   header input[type="text"]::-ms-input-placeholder {
-    color: #E7E6E6;
+    color: #e7e6e6;
     opacity: 0.5;
     width: 100%;
   }
   header input[type="text"]::placeholder {
-    color: #E7E6E6;
+    color: #e7e6e6;
     opacity: 0.5;
     width: 100%;
   }
 }
 
 header input[type="text"]:focus {
-  border-color: #E7E6E6;
+  border-color: #e7e6e6;
   padding-bottom: 2px;
 }
 
@@ -448,19 +477,80 @@ header .searchHint.hideHint {
   opacity: 0;
 }
 
+.redo {
+  position: absolute;
+  font-size: 3rem;
+  top: 25px;
+  left: 25px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background: #bad8ca;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.redo:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  background: #99c6b1;
+}
+
+.redo i {
+  margin-left: 2px;
+}
+
 .dashboard {
   background: white;
   color: #000;
   height: 100vh;
 }
 
+.dashboardOff {
+  display: none;
+}
+
 .dashboardWrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 95%;
-  height: 100vh;
-  margin: 0 auto;
+  position: relative;
+  padding: 3vw;
+  display: -ms-grid;
+  display: grid;
+  height: 100%;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  -ms-grid-rows: (minmax(80px, 1fr))[4];
+      grid-template-rows: repeat(4, minmax(80px, 1fr));
+      grid-template-areas: "cityName cityName weather dateTime" "news news weather dateTime" "news news cityPhoto cityPhoto" "news news cityPhoto cityPhoto";
+  grid-auto-rows: minmax(80px, 1fr);
+  grid-gap: 30px;
+}
+
+@media (max-width: 1000px) {
+  .dashboardWrapper {
+        grid-template-areas: "cityName cityName weather weather" "news news dateTime dateTime" "news news cityPhoto cityPhoto" "news news cityPhoto cityPhoto";
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardWrapper {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    -ms-grid-rows: 160px 150px 150px 150px minmax(800px, 1fr);
+        grid-template-rows: 160px 150px 150px 150px minmax(800px, 1fr);
+        grid-template-areas: "cityName" "cityPhoto" "weather" "dateTime" "news";
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .dashboardWrapper {
+    -ms-grid-rows: 180px 150px 150px 150px minmax(800px, 1fr);
+        grid-template-rows: 180px 150px 150px 150px minmax(800px, 1fr);
+    padding: 0;
+    grid-gap: 20px;
+  }
 }
 
 .dashboardWrapper a {
@@ -469,42 +559,42 @@ header .searchHint.hideHint {
   padding: 12px;
 }
 
-@media (max-width: 670px) {
-  .dashboardWrapper {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    width: 100%;
-  }
+.dashboardWrapper .cityName {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: cityName;
 }
 
-.dashboardLeft,
-.dashboardRight {
-  margin: 30px 15px 0;
-  width: 50%;
-  height: calc(100% - 30px);
+.dashboardWrapper .news {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: news;
 }
 
-@media (max-width: 670px) {
-  .dashboardLeft,
-  .dashboardRight {
-    width: 100%;
-    margin: 30px 0 0;
-  }
+.dashboardWrapper .weather {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 3;
+  grid-area: weather;
 }
 
-.dashboardRight {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+.dashboardWrapper .dateTime {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 4;
+  grid-area: dateTime;
 }
 
-.cityPhoto {
-  width: 100%;
-  height: calc(50% - 15px);
+.dashboardWrapper .cityPhoto {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 2;
+  grid-area: cityPhoto;
+  max-width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -524,17 +614,8 @@ header .searchHint.hideHint {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 30%;
-  margin-bottom: 30px;
   text-transform: lowercase;
   font-family: "Campton Medium", sans-serif;
-}
-
-@media (max-width: 670px) {
-  .cityName {
-    padding: 0 5%;
-    margin-bottom: 20px;
-  }
 }
 
 .cityName h2 {
@@ -585,11 +666,11 @@ header .searchHint.hideHint {
 }
 
 .cityName h3 span::after {
-  content: '';
+  content: "";
   display: block;
   width: 110%;
   height: 48%;
-  background: #BAD8CA;
+  background: #bad8ca;
   position: absolute;
   z-index: 0;
   mix-blend-mode: multiply;
@@ -599,9 +680,20 @@ header .searchHint.hideHint {
 
 .news {
   overflow-y: auto;
-  height: calc(70% - 30px);
   padding: 20px;
-  background: #e8e8e8;
+  background: #dbdbdb;
+}
+
+@media (max-width: 768px) {
+  .news {
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 500px) {
+  .news {
+    overflow-y: auto;
+  }
 }
 
 .news h4 {
@@ -654,8 +746,12 @@ header .searchHint.hideHint {
   margin: 0 0 0.5rem;
 }
 
-.news .singleArticle img {
+.news .singleArticle .articleImage {
   max-height: 260px;
+  overflow: hidden;
+}
+
+.news .singleArticle img {
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -735,7 +831,7 @@ header .searchHint.hideHint {
   .closeX.zoomIn {
     -webkit-transform: scale(1) translate(-50%);
             transform: scale(1) translate(-50%);
-    color: #E7E6E6;
+    color: #e7e6e6;
     top: auto;
     bottom: -70px;
     left: 50%;
@@ -763,9 +859,9 @@ header .searchHint.hideHint {
 .cityList {
   width: 100%;
   max-height: 75vh;
-  background: #E7E6E6;
+  background: #e7e6e6;
   padding: 2% 0 3%;
-  border: 5px solid #E7E6E6;
+  border: 5px solid #e7e6e6;
   font-family: "Campton Medium", sans-serif;
   font-size: 4.5rem;
   text-align: center;
@@ -820,7 +916,7 @@ header .searchHint.hideHint {
 
 .cityList li.selectedCity a {
   cursor: default;
-  color: #E7E6E6;
+  color: #e7e6e6;
   -webkit-transform: scale(1.08);
           transform: scale(1.08);
   opacity: 1;
@@ -867,23 +963,17 @@ header .searchHint.hideHint {
 }
 
 .dateTime {
-  font-size: calc(1.2rem + (14 - 12)*(100vw - 350px)/(1280 - 350));
+  background: #dbdbdb;
+  font-size: calc(1.2rem + (14 - 12) * (100vw - 350px) / (1280 - 350));
   text-transform: lowercase;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-}
-
-@media (max-width: 900px) {
-  .dateTime {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    font-size: 1.2rem;
-  }
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 .dateTime div {
@@ -895,9 +985,18 @@ header .searchHint.hideHint {
           align-items: center;
 }
 
-@media (max-width: 900px) {
-  .dateTime div {
-    width: 50%;
+.dateTime div:nth-of-type(1) {
+  color: #000;
+}
+
+@media (max-width: 1000px) {
+  .dateTime > div {
+    height: 50%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .dateTime > div:first-child {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -905,36 +1004,16 @@ header .searchHint.hideHint {
         flex-wrap: wrap;
     -ms-flex-line-pack: center;
         align-content: center;
-  }
-}
-
-.dateTime div:nth-of-type(1) {
-  color: #000;
-}
-
-@media (max-width: 900px) {
-  .dateTime div:nth-of-type(1) {
     height: 100%;
   }
 }
 
-@media (max-width: 900px) {
-  .dateTime div:nth-of-type(1) {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
+.dateTime > div:first-child > * {
+  width: 100%;
 }
 
 .dateTime .date {
-  font-size: calc(1.6rem + (20 - 16)*(100vw - 900px)/(1280 - 900));
-}
-
-@media (max-width: 900px) {
-  .dateTime .date {
-    font-size: 1.6rem;
-  }
+  font-size: calc(1.6rem + (20 - 16) * (100vw - 900px) / (1280 - 900));
 }
 
 .dateTime h4 {
@@ -942,26 +1021,17 @@ header .searchHint.hideHint {
 }
 
 .dateTime .time {
-  font-size: calc(4rem + (60 - 40)*(100vw - 900px)/(1280 - 900));
+  font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1280 - 320));
   color: transparent;
   font-family: "Campton Medium", sans-serif;
   opacity: 1;
   -webkit-text-stroke: 1.4px #000;
 }
 
-@media (max-width: 900px) {
-  .dateTime .time {
-    font-size: 4rem;
-  }
-}
-
 .weather,
 .dateTime {
-  width: calc(50% - 15px);
-  height: calc(50% - 15px);
-  margin-bottom: 30px;
-  padding: 5% 0;
-  background: #DBDBDB;
+  width: 100%;
+  padding: 9% 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -975,23 +1045,10 @@ header .searchHint.hideHint {
   text-align: center;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .weather,
   .dateTime {
-    width: calc(100%);
-    height: 140px;
-    padding: 0 5%;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    margin-bottom: 15px;
-  }
-}
-
-@media (max-width: 670px) {
-  .weather,
-  .dateTime {
-    height: calc(50% - 15px);
+    padding: 5% 0;
   }
 }
 
@@ -1001,22 +1058,7 @@ header .searchHint.hideHint {
   font-size: 1.6rem;
 }
 
-@media (max-width: 900px) {
-  .weather {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    margin-right: 0;
-  }
-}
-
-.weather h4 {
-  color: #000;
-  margin-bottom: 5px;
-}
-
-.weather div {
+.weather > div {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1027,44 +1069,80 @@ header .searchHint.hideHint {
           flex-direction: column;
 }
 
-@media (max-width: 900px) {
-  .weather div {
-    width: calc(100% / 3);
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+@media (max-width: 1000px) {
+  .weather {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .weather > div {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 33.33%;
+            flex: 1 1 33.33%;
+  }
+}
+
+.weather h4 {
+  color: #000;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 1000px) {
+  .weather .temp-info {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 25%;
+            flex: 1 1 25%;
+  }
+}
+
+@media (max-width: 768px) {
+  .weather .temp-info {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 33.33%;
+            flex: 1 1 33.33%;
+  }
+}
+
+@media (max-width: 500px) {
+  .weather .temp-info {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 20%;
+            flex: 1 1 20%;
   }
 }
 
 .weather .temperature {
-  font-size: calc(4rem + (60 - 40)*(100vw - 900px)/(1280 - 900));
+  font-size: calc(3.2rem + (60 - 32) * (100vw - 320px) / (1280 - 320));
   color: transparent;
   font-family: "Campton Medium", sans-serif;
   opacity: 1;
   -webkit-text-stroke: 1.4px #000;
 }
 
-@media (max-width: 900px) {
-  .weather .temperature {
-    font-size: 4rem;
+.weather .weatherIcon {
+  max-width: 30%;
+  min-width: 100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1000px) {
+  .weather .weatherIcon {
+    min-width: 80px;
+    max-width: 20%;
   }
 }
 
-.weather .weatherIcon {
-  -o-object-fit: cover;
-     object-fit: cover;
-  height: 25%;
-  padding: 0 25%;
-}
-
-.weather .weatherIcon img {
-  height: 100%;
-}
-
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .weather .weatherIcon {
-    height: 100%;
-    padding: 20px;
+    max-width: 60px;
+    max-width: 15%;
   }
 }
 
@@ -1072,9 +1150,9 @@ header .searchHint.hideHint {
   margin-bottom: 5px;
 }
 
-@media (max-width: 900px) {
-  .weather div:nth-of-type(3) p {
-    display: none;
+@media (max-width: 1000px) {
+  .weather .sun-times {
+    padding: 10px;
   }
 }
 /*# sourceMappingURL=styles.css.map */

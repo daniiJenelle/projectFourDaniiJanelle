@@ -1,55 +1,133 @@
+.redo {
+  position: absolute;
+  font-size: 3rem;
+  top: 25px;
+  left: 25px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background: $teal;
+  transform: scale(1);
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+    background: darken($teal, 10%);
+  }
+
+  i {
+    margin-left: 2px;
+  }
+}
+
 .dashboard {
-    background: white;
-    color: $black;
-    height: 100vh;
+  background: white;
+  color: $black;
+  height: 100vh;
+}
+
+.dashboardOff {
+  display: none;
 }
 
 .dashboardWrapper {
-    display: flex;
-    width: 95%;
-    height: 100vh;
-    margin: 0 auto;
+  position: relative;
+  padding: 3vw;
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, minmax(80px, 1fr));
+  grid-template-areas:
+    "cityName cityName weather dateTime"
+    "news news weather dateTime"
+    "news news cityPhoto cityPhoto"
+    "news news cityPhoto cityPhoto";
 
-    a {
+  grid-auto-rows: minmax(80px, 1fr);
+  grid-gap: 30px;
+
+  @include for-small-laptops {
+    grid-template-areas:
+      "cityName cityName weather weather"
+      "news news dateTime dateTime"
+      "news news cityPhoto cityPhoto"
+      "news news cityPhoto cityPhoto";
+  }
+
+  @include for-tablet {
+    grid-template-columns: 1fr;
+    grid-template-rows: 160px 150px 150px 150px minmax(800px, 1fr);
+    grid-template-areas:
+      "cityName"
+      "cityPhoto"
+      "weather"
+      "dateTime"
+      "news";
+    min-height: 100%;
+  }
+
+  @include for-mobile {
+    grid-template-rows: 180px 150px 150px 150px minmax(800px, 1fr);
+    padding: 0;
+    grid-gap: 20px;
+  }
+
+  a {
     text-decoration: none;
     color: $black;
     padding: 12px;
-    }
+  }
 
-    @media (max-width: 670px) {
-      flex-direction: column;
-      width: 100%;
-    }
+  .cityName {
+    grid-area: cityName;
+  }
+
+  .news {
+    grid-area: news;
+  }
+
+  .weather {
+    grid-area: weather;
+  }
+
+  .dateTime {
+    grid-area: dateTime;
+  }
+
+  .cityPhoto {
+    grid-area: cityPhoto;
+    max-width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  // @media (max-width: 670px) {
+  //   flex-direction: column;
+  //   width: 100%;
+  // }
 }
 
-.dashboardLeft,
-.dashboardRight {
-    margin: 30px 15px 0;
-    width: 50%;
-    height: calc(100% - 30px);
+// .dashboardLeft,
+// .dashboardRight {
+//     margin: 30px 15px 0;
+//     width: 50%;
+//     height: calc(100% - 30px);
 
-    @media (max-width: 670px) {
-      width: 100%;
-      margin: 30px 0 0;
-    }
+//     @media (max-width: 670px) {
+//       width: 100%;
+//       margin: 30px 0 0;
+//     }
 
-}
+// }
 
-.dashboardRight {
-  display: flex;
-  flex-wrap: wrap;
-}
+// .dashboardRight {
+//   display: flex;
+//   flex-wrap: wrap;
+// }
 
-.dashboardLeft {
-  @media (max-width: 670px) {
-      // height: 90%;
-    }
-}
-
-.cityPhoto {
-  width: 100%;
-  height: calc(50% - 15px);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+// .dashboardLeft {
+//   @media (max-width: 670px) {
+//       // height: 90%;
+//     }
+// }
