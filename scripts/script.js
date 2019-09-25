@@ -36,7 +36,7 @@ app.getCityInfo = function(chosenCity) {
     data: {
       reqUrl: `http://dataservice.accuweather.com/locations/v1/cities/search`,
       params: {
-        apikey: "ujcBYMnU2VPMzAfF7kSyzCDUe4lkHJqH ",
+        apikey: "pKACUspG1cEsdhpjrwhXDEYaRk1tjAzI",
         q: chosenCity
       },
       xmlToJSON: false,
@@ -420,7 +420,7 @@ app.displayTimeDashboard = function(time, localOffset) {
   minutes = minutes > 9 ? minutes : "0" + minutes;
 
   $(`.dateTime`).html(
-    `<div><h4>local date + time</h4><p class="date">${displayedTime.toDateString()}</p></div><div><p class="time">${displayedTime.getHours()}:${minutes}</p></div><div><p class="timezone">GMT ${offsetSign}${localOffset}</p><p>(${
+    `<div><h4>local date + time</h4><p class="date">${displayedTime.toDateString()}</p></div><div><p class="time">${displayedTime.getHours()}:${minutes}</p><p class="timezone">GMT ${offsetSign}${localOffset}</p><p>(${
       app.timezone
     })</p></div>`
   );

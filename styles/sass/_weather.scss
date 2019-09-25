@@ -6,6 +6,10 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  
+  @media (max-width: 1000px) {
+    padding: 0;
+  }
 
   @include for-tablet {
     padding: 5% 0;
@@ -67,6 +71,11 @@
 
     @include for-small-laptops {
       min-width: 80px;
+      max-width: 20%;
+    }
+
+    @media (max-height: 650px) {
+      min-width: 60px;
       max-width: 20%;
     }
 

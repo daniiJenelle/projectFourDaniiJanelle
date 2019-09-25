@@ -5,10 +5,17 @@
   flex-wrap: wrap;
   flex-direction: row;
   align-content: center;
+  justify-content: space-around;
 
   div {
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 1000px) {
+      width: 50%;
+      justify-content: space-between;
+    }
+    
 
     &:nth-of-type(1) {
       color: $black;
@@ -47,5 +54,6 @@
     font-family: $med;
     opacity: 1;
     -webkit-text-stroke: 1.4px $black;
+    padding-bottom: 5%;
   }
 }
